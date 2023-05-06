@@ -75,6 +75,7 @@ class OnboardPage extends StatelessWidget {
                                 height: 32,
                               ),
                               Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
                                     controller.onboardContentList[index].title,

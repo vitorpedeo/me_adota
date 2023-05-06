@@ -8,21 +8,21 @@ class OnboardController extends ChangeNotifier {
   );
   final List<OnboardingContent> _onboardContentList = [
     OnboardingContent(
-      title: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
+      title: 'Adote um amigo peludo hoje mesmo',
       description:
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nec',
+          'Encontre o seu próximo companheiro de quatro patas com a ajuda do Me Adota!',
       image: AppSvgs.dog1,
     ),
     OnboardingContent(
-      title: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
+      title: 'Sem complicações, sem burocracia',
       description:
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nec',
+          'Nosso app torna o processo de adoção rápido e fácil. Preencha seu perfil, encontre o animal que deseja adotar, e pronto! ',
       image: AppSvgs.dog2,
     ),
     OnboardingContent(
-      title: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
+      title: 'Encontre pets mais próximos a você',
       description:
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nec',
+          'Permita que o Me Adota acesse sua localização e encontre animais próximos a você.',
       image: AppSvgs.cat1,
     ),
   ];
