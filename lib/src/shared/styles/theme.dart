@@ -4,7 +4,7 @@ class AppTheme {
   // Colors
   static const pink = Color(0xFFFF5C8A);
   static const pinkAlpha = Color.fromRGBO(255, 92, 138, 0.2);
-  static const background = Color(0xFFF3F4F6);
+  static const background = Color(0xFFFAFAFA);
   static const white = Color(0xFFFFFFFF);
   static const gray = Color(0xFFEDEDE9);
   static const placeholder = Color(0xFFBCBCBC);

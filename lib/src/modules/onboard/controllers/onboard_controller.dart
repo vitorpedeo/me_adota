@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:me_adota/src/modules/onboard/models/onboarding_content_model.dart';
+import 'package:me_adota/src/modules/onboard/widgets/localization_switcher.dart';
 import 'package:me_adota/src/shared/styles/svgs.dart';
 
 class OnboardController extends ChangeNotifier {
@@ -24,13 +25,24 @@ class OnboardController extends ChangeNotifier {
       description:
           'Permita que o Me Adota acesse sua localização e encontre animais próximos a você.',
       image: AppSvgs.cat1,
+      extraWidget: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: const [
+          SizedBox(
+            height: 16,
+          ),
+          LocalizationSwitcher(),
+        ],
+      ),
     ),
   ];
   int _currentPageIndex = 0;
+  bool _hasLocationPermission = false;
 
   PageController get pageController => _pageController;
   List<OnboardingContent> get onboardContentList => _onboardContentList;
   int get currentPageIndex => _currentPageIndex;
+  bool get hasLocationPermission => _hasLocationPermission;
   int get pagesQuantity => _onboardContentList.length;
   bool get isLastPage => _currentPageIndex == _onboardContentList.length - 1;
 
@@ -44,6 +56,11 @@ class OnboardController extends ChangeNotifier {
       duration: const Duration(milliseconds: 400),
       curve: Curves.easeInOut,
     );
+    notifyListeners();
+  }
+
+  void handleLocationPermission(bool value) {
+    _hasLocationPermission = value;
     notifyListeners();
   }
 

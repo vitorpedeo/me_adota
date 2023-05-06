@@ -15,7 +15,7 @@ class OnboardPage extends StatelessWidget {
     return ChangeNotifierProvider<OnboardController>(
       create: (context) => OnboardController(),
       child: Scaffold(
-        backgroundColor: AppTheme.white,
+        backgroundColor: AppTheme.background,
         body: SafeArea(
           child: Container(
             padding: const EdgeInsets.only(

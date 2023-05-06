@@ -47,6 +47,8 @@ class PageSlider extends StatelessWidget {
                           color: AppTheme.bodyText,
                         ),
                       ),
+                      controller.onboardContentList[index].extraWidget ??
+                          const SizedBox.shrink(),
                     ],
                   ),
                 ],
