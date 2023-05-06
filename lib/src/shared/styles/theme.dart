@@ -19,11 +19,13 @@ class AppTheme {
     fontFamily: 'Archivo',
     fontSize: 24,
     fontWeight: FontWeight.w700,
+    height: 1.17,
   );
   static const headlineMedium = TextStyle(
     fontFamily: 'Archivo',
     fontSize: 24,
     fontWeight: FontWeight.w500,
+    height: 1.17,
   );
   static const headlineSecondaryBold = TextStyle(
     fontFamily: 'Archivo',
@@ -39,16 +41,19 @@ class AppTheme {
     fontFamily: 'Archivo',
     fontSize: 16,
     fontWeight: FontWeight.w700,
+    height: 1.75,
   );
   static const bodyMedium = TextStyle(
     fontFamily: 'Archivo',
     fontSize: 16,
     fontWeight: FontWeight.w500,
+    height: 1.75,
   );
   static const bodyRegular = TextStyle(
     fontFamily: 'Archivo',
     fontSize: 16,
     fontWeight: FontWeight.w400,
+    height: 1.75,
   );
   static const bodySecondaryBold = TextStyle(
     fontFamily: 'Archivo',

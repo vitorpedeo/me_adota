@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:me_adota/src/modules/onboard/pages/onboard_page.dart';
 import 'package:me_adota/src/shared/styles/theme.dart';
 
 class App extends StatelessWidget {
@@ -11,18 +12,7 @@ class App extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: Scaffold(
-        body: SafeArea(
-          child: Center(
-            child: Text(
-              'Me Adota',
-              style: AppTheme.headlineBold.copyWith(
-                color: AppTheme.headText,
-              ),
-            ),
-          ),
-        ),
-      ),
+      home: OnboardPage(),
     );
   }
 }
