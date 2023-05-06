@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:me_adota/src/modules/onboard/models/onboarding_content_model.dart';
+import 'package:me_adota/src/modules/onboard/widgets/next_page_button.dart';
+import 'package:me_adota/src/modules/onboard/widgets/page_indicator.dart';
 import 'package:me_adota/src/shared/styles/svgs.dart';
 import 'package:me_adota/src/shared/styles/theme.dart';
 
@@ -133,32 +135,12 @@ class _OnboardPageState extends State<OnboardPage> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Row(
-                    children: List.generate(
-                      onboardContentList.length,
-                      (index) => AnimatedContainer(
-                        duration: const Duration(
-                          milliseconds: 200,
-                        ),
-                        margin: EdgeInsets.only(
-                          right: 6,
-                        ),
-                        width: _currentPage == index ? 24 : 8,
-                        height: 8,
-                        decoration: BoxDecoration(
-                          color: _currentPage == index
-                              ? AppTheme.pink
-                              : AppTheme.pinkAlpha,
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(
-                              12,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
+                  PageIndicator(
+                    activeIndex: _currentPage,
+                    pagesQuantity: onboardContentList.length,
                   ),
-                  ElevatedButton(
+                  NextPageButton(
+                    isLastPage: _currentPage != onboardContentList.length - 1,
                     onPressed: () {
                       if (_currentPage != onboardContentList.length - 1) {
                         _pageController.nextPage(
@@ -167,19 +149,7 @@ class _OnboardPageState extends State<OnboardPage> {
                         );
                       }
                     },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: AppTheme.pink,
-                      fixedSize: const Size(56, 56),
-                      shape: const CircleBorder(),
-                    ),
-                    child: Icon(
-                      _currentPage == onboardContentList.length - 1
-                          ? Icons.check
-                          : Icons.arrow_right_alt_rounded,
-                      color: AppTheme.white,
-                      size: 28,
-                    ),
-                  )
+                  ),
                 ],
               ),
             ],
