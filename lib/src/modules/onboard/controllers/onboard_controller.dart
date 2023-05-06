@@ -20,7 +20,7 @@ class OnboardController extends ChangeNotifier {
       image: AppSvgs.dog2,
     ),
     OnboardingContent(
-      title: 'Encontre pets mais próximos a você',
+      title: 'Encontre pets mais próximos de você',
       description:
           'Permita que o Me Adota acesse sua localização e encontre animais próximos a você.',
       image: AppSvgs.cat1,

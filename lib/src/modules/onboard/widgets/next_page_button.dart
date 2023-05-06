@@ -23,10 +23,24 @@ class NextPageButton extends StatelessWidget {
             fixedSize: const Size(56, 56),
             shape: const CircleBorder(),
           ),
-          child: Icon(
-            controller.isLastPage ? Icons.check : Icons.arrow_right_alt_rounded,
-            color: AppTheme.white,
-            size: 28,
+          child: AnimatedSwitcher(
+            duration: const Duration(
+              milliseconds: 200,
+            ),
+            transitionBuilder: (child, animation) {
+              return ScaleTransition(
+                scale: animation,
+                child: child,
+              );
+            },
+            child: Icon(
+              controller.isLastPage
+                  ? Icons.check
+                  : Icons.arrow_right_alt_rounded,
+              key: ValueKey(controller.isLastPage),
+              color: AppTheme.white,
+              size: 28,
+            ),
           ),
         );
       },

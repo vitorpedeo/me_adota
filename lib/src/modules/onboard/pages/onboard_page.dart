@@ -70,6 +70,7 @@ class OnboardPage extends StatelessWidget {
                             children: [
                               SvgPicture.asset(
                                 controller.onboardContentList[index].image,
+                                height: 360,
                               ),
                               const SizedBox(
                                 height: 32,
