@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:me_adota/src/modules/onboard/controllers/onboard_controller.dart';
+import 'package:me_adota/src/shared/controllers/localization_controller.dart';
 import 'package:me_adota/src/shared/styles/theme.dart';
 import 'package:provider/provider.dart';
 
@@ -38,13 +39,13 @@ class LocalizationSwitcher extends StatelessWidget {
             height: 32,
             child: FittedBox(
               fit: BoxFit.contain,
-              child: Consumer<OnboardController>(
+              child: Consumer<LocalizationController>(
                 builder: (context, controller, child) {
                   return CupertinoSwitch(
                     activeColor: AppTheme.pink,
-                    value: controller.hasLocationPermission,
+                    value: controller.isEnabled,
                     onChanged: (newValue) {
-                      controller.handleLocationPermission(newValue);
+                      controller.handleLocalizationToggle(newValue);
                     },
                   );
                 },

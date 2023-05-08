@@ -47,5 +47,8 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+
+  <key>NSLocationWhenInUseUsageDescription</key>
+  <string>We need your location when in use to display nearby pets</string>
 </dict>
 </plist>
