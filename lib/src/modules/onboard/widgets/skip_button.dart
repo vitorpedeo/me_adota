@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 class SkipButton extends StatelessWidget {
   const SkipButton({super.key});
 
+  @override
   Widget build(BuildContext context) {
     return Consumer<OnboardController>(
       builder: (context, controller, child) {
@@ -16,7 +17,7 @@ class SkipButton extends StatelessWidget {
           ),
           child: GestureDetector(
             onTap: () {
-              debugPrint('Pular');
+              controller.skipOnboard();
             },
             child: Text(
               'Pular',

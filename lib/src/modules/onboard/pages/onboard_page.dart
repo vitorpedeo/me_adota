@@ -5,48 +5,80 @@ import 'package:me_adota/src/modules/onboard/widgets/page_indicator.dart';
 import 'package:me_adota/src/modules/onboard/widgets/page_slider.dart';
 import 'package:me_adota/src/modules/onboard/widgets/skip_button.dart';
 import 'package:me_adota/src/shared/styles/theme.dart';
+import 'package:me_adota/src/shared/widgets/app_bottom_sheet.dart';
 import 'package:provider/provider.dart';
 
-class OnboardPage extends StatelessWidget {
+/**
+ * TODO: Refactor this page to be a StatefulWidget, using WidgetBinding to
+ * listen to the lifecycle events
+ */
+class OnboardPage extends StatefulWidget {
   const OnboardPage({super.key});
 
   @override
+  State<OnboardPage> createState() => _OnboardPageState();
+}
+
+class _OnboardPageState extends State<OnboardPage> {
+  @override
+  void initState() {
+    super.initState();
+
+    final OnboardController controller = context.read();
+    controller.addListener(() {
+      if (controller.showPermissionWarning) {
+        showModalBottomSheet(
+          context: context,
+          builder: (_) => const AppBottomSheet(
+            title: 'Permissão de localização',
+            description:
+                'Para que possamos encontrar animais próximos a você, precisamos da sua permissão para acessar sua localização.',
+          ),
+          isScrollControlled: true,
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(
+              top: Radius.circular(32),
+            ),
+          ),
+        );
+      }
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<OnboardController>(
-      create: (context) => OnboardController(),
-      child: Scaffold(
-        backgroundColor: AppTheme.background,
-        body: SafeArea(
-          child: Container(
-            padding: const EdgeInsets.only(
-              top: 32,
-              right: 32,
-              bottom: 48,
-              left: 32,
-            ),
-            width: double.infinity,
-            height: double.infinity,
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: const [
-                    SkipButton(),
-                  ],
-                ),
-                const PageSlider(),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: const [
-                    PageIndicator(),
-                    NextPageButton(),
-                  ],
-                ),
-              ],
-            ),
+    return Scaffold(
+      backgroundColor: AppTheme.background,
+      body: SafeArea(
+        child: Container(
+          padding: const EdgeInsets.only(
+            top: 32,
+            right: 32,
+            bottom: 48,
+            left: 32,
+          ),
+          width: double.infinity,
+          height: double.infinity,
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: const [
+                  SkipButton(),
+                ],
+              ),
+              const PageSlider(),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: const [
+                  PageIndicator(),
+                  NextPageButton(),
+                ],
+              ),
+            ],
           ),
         ),
       ),

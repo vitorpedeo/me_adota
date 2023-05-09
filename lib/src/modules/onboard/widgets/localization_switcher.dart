@@ -43,7 +43,7 @@ class LocalizationSwitcher extends StatelessWidget {
                 builder: (context, controller, child) {
                   return CupertinoSwitch(
                     activeColor: AppTheme.pink,
-                    value: controller.isEnabled,
+                    value: controller.isPermissionEnabled,
                     onChanged: (newValue) {
                       controller.handleLocalizationToggle(newValue);
                     },

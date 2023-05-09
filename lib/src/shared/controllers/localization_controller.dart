@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class LocalizationController extends ChangeNotifier {
-  bool _isEnabled = false;
+  bool _isPermissionEnabled = false;
 
-  bool get isEnabled => _isEnabled;
+  bool get isPermissionEnabled => _isPermissionEnabled;
 
   LocalizationController() {
     checkInitialPermission();
@@ -14,7 +14,7 @@ class LocalizationController extends ChangeNotifier {
     final PermissionStatus status = await Permission.locationWhenInUse.status;
 
     if (status.isGranted) {
-      _isEnabled = true;
+      _isPermissionEnabled = true;
       notifyListeners();
     }
   }
@@ -24,7 +24,7 @@ class LocalizationController extends ChangeNotifier {
       final PermissionStatus status = await Permission.locationWhenInUse.status;
 
       if (status.isGranted) {
-        _isEnabled = true;
+        _isPermissionEnabled = true;
         notifyListeners();
 
         return;
@@ -39,7 +39,7 @@ class LocalizationController extends ChangeNotifier {
           await Permission.locationWhenInUse.request();
 
       if (requestStatus.isGranted) {
-        _isEnabled = true;
+        _isPermissionEnabled = true;
         notifyListeners();
 
         return;

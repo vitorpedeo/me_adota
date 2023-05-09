@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:me_adota/src/modules/onboard/models/onboarding_content_model.dart';
 import 'package:me_adota/src/modules/onboard/widgets/localization_switcher.dart';
+import 'package:me_adota/src/shared/controllers/localization_controller.dart';
 import 'package:me_adota/src/shared/styles/svgs.dart';
 
 class OnboardController extends ChangeNotifier {
+  final LocalizationController localizationController;
   final PageController _pageController = PageController(
     initialPage: 0,
   );
@@ -37,12 +39,14 @@ class OnboardController extends ChangeNotifier {
     ),
   ];
   int _currentPageIndex = 0;
-  bool _hasLocationPermission = false;
+  bool _showPermissionWarning = false;
+
+  OnboardController({required this.localizationController});
 
   PageController get pageController => _pageController;
   List<OnboardingContent> get onboardContentList => _onboardContentList;
   int get currentPageIndex => _currentPageIndex;
-  bool get hasLocationPermission => _hasLocationPermission;
+  bool get showPermissionWarning => _showPermissionWarning;
   int get pagesQuantity => _onboardContentList.length;
   bool get isLastPage => _currentPageIndex == _onboardContentList.length - 1;
 
@@ -59,9 +63,15 @@ class OnboardController extends ChangeNotifier {
     notifyListeners();
   }
 
-  void handleLocationPermission(bool value) {
-    _hasLocationPermission = value;
-    notifyListeners();
+  void skipOnboard() {
+    final bool isLocalizationEnabled =
+        localizationController.isPermissionEnabled;
+
+    if (!isLocalizationEnabled) {
+      _showPermissionWarning = true;
+      notifyListeners();
+      return;
+    }
   }
 
   @override
