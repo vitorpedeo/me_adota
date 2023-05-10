@@ -4,8 +4,13 @@ import 'package:me_adota/src/shared/styles/theme.dart';
 class AppBottomSheet extends StatelessWidget {
   final String title;
   final String? description;
+  final List<Widget> actions;
 
-  const AppBottomSheet({super.key, required this.title, this.description});
+  const AppBottomSheet(
+      {super.key,
+      required this.title,
+      this.description,
+      this.actions = const []});
 
   @override
   Widget build(BuildContext context) {
@@ -56,6 +61,52 @@ class AppBottomSheet extends StatelessWidget {
                   style: AppTheme.bodyRegular.copyWith(
                     color: AppTheme.bodyText,
                   ),
+                ),
+              ],
+            ),
+          if (actions.isNotEmpty)
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(
+                  height: 32,
+                ),
+                // SizedBox(
+                //   height: 40,
+                //   child: ListView.separated(
+                //     scrollDirection: Axis.horizontal,
+                //     itemCount: actions.length,
+                //     itemBuilder: (context, index) {
+                //       return actions[index];
+                //     },
+                //     separatorBuilder: (context, index) {
+                //       return const SizedBox(
+                //         width: 16,
+                //       );
+                //     },
+                //   ),
+                // ),
+                Row(
+                  children: actions.map((action) {
+                    if (actions.indexOf(action) % 2 == 0) {
+                      return Expanded(
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: action,
+                            ),
+                            const SizedBox(
+                              width: 16,
+                            ),
+                          ],
+                        ),
+                      );
+                    }
+
+                    return Expanded(
+                      child: action,
+                    );
+                  }).toList(),
                 ),
               ],
             ),

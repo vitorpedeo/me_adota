@@ -21,31 +21,6 @@ class OnboardPage extends StatefulWidget {
 
 class _OnboardPageState extends State<OnboardPage> {
   @override
-  void initState() {
-    super.initState();
-
-    final OnboardController controller = context.read();
-    controller.addListener(() {
-      if (controller.showPermissionWarning) {
-        showModalBottomSheet(
-          context: context,
-          builder: (_) => const AppBottomSheet(
-            title: 'Permissão de localização',
-            description:
-                'Para que possamos encontrar animais próximos a você, precisamos da sua permissão para acessar sua localização.',
-          ),
-          isScrollControlled: true,
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(
-              top: Radius.circular(32),
-            ),
-          ),
-        );
-      }
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppTheme.background,

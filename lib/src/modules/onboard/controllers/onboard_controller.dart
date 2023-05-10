@@ -39,16 +39,15 @@ class OnboardController extends ChangeNotifier {
     ),
   ];
   int _currentPageIndex = 0;
-  bool _showPermissionWarning = false;
 
   OnboardController({required this.localizationController});
 
   PageController get pageController => _pageController;
   List<OnboardingContent> get onboardContentList => _onboardContentList;
   int get currentPageIndex => _currentPageIndex;
-  bool get showPermissionWarning => _showPermissionWarning;
   int get pagesQuantity => _onboardContentList.length;
   bool get isLastPage => _currentPageIndex == _onboardContentList.length - 1;
+  bool get isLocalizationEnabled => localizationController.isPermissionEnabled;
 
   void changePage(int newPage) {
     _currentPageIndex = newPage;
@@ -61,17 +60,6 @@ class OnboardController extends ChangeNotifier {
       curve: Curves.easeInOut,
     );
     notifyListeners();
-  }
-
-  void skipOnboard() {
-    final bool isLocalizationEnabled =
-        localizationController.isPermissionEnabled;
-
-    if (!isLocalizationEnabled) {
-      _showPermissionWarning = true;
-      notifyListeners();
-      return;
-    }
   }
 
   @override

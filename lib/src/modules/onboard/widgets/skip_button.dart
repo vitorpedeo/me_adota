@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:me_adota/src/modules/onboard/controllers/onboard_controller.dart';
+import 'package:me_adota/src/modules/onboard/utisl/show_localization_warning.dart';
 import 'package:me_adota/src/shared/styles/theme.dart';
 import 'package:provider/provider.dart';
 
@@ -17,7 +18,11 @@ class SkipButton extends StatelessWidget {
           ),
           child: GestureDetector(
             onTap: () {
-              controller.skipOnboard();
+              if (!controller.isLocalizationEnabled) {
+                showLocalizationWarning(context);
+              } else {
+                //
+              }
             },
             child: Text(
               'Pular',
