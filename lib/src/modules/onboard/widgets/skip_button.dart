@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:me_adota/src/modules/onboard/controllers/onboard_controller.dart';
-import 'package:me_adota/src/modules/onboard/utisl/show_localization_warning.dart';
+import 'package:me_adota/src/modules/onboard/utils/show_localization_warning.dart';
 import 'package:me_adota/src/shared/styles/theme.dart';
 import 'package:provider/provider.dart';
 

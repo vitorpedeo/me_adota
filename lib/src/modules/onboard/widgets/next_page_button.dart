@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:me_adota/src/modules/onboard/controllers/onboard_controller.dart';
-import 'package:me_adota/src/modules/onboard/utisl/show_localization_warning.dart';
+import 'package:me_adota/src/modules/onboard/utils/show_localization_warning.dart';
 import 'package:me_adota/src/shared/styles/theme.dart';
+import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:provider/provider.dart';
 
 class NextPageButton extends StatelessWidget {
@@ -38,13 +39,13 @@ class NextPageButton extends StatelessWidget {
                 child: child,
               );
             },
-            child: Icon(
+            child: PhosphorIcon(
               controller.isLastPage
-                  ? Icons.check
-                  : Icons.arrow_right_alt_rounded,
+                  ? PhosphorIcons.bold.check
+                  : PhosphorIcons.bold.arrowRight,
               key: ValueKey(controller.isLastPage),
               color: AppTheme.white,
-              size: 28,
+              size: 24,
             ),
           ),
         );

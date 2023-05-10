@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:me_adota/src/shared/styles/theme.dart';
 import 'package:me_adota/src/shared/widgets/app_bottom_sheet.dart';
+import 'package:me_adota/src/shared/widgets/app_button.dart';
 
 Future<dynamic> showLocalizationWarning(BuildContext context) {
   return showModalBottomSheet(
@@ -10,27 +10,14 @@ Future<dynamic> showLocalizationWarning(BuildContext context) {
       description:
           'Para que possamos encontrar animais próximos a você, precisamos da sua permissão para acessar sua localização.',
       actions: [
-        Container(
-          height: 40,
-          decoration: const BoxDecoration(
-            color: AppTheme.pinkAlpha,
-          ),
-          child: Text(
-            'Ignorar',
-            style: AppTheme.bodyRegular.copyWith(
-              color: AppTheme.bodyText,
-            ),
-          ),
+        AppButton(
+          text: 'Ignorar',
+          variant: AppButtonVariant.secondary,
+          onPressed: () {},
         ),
-        Container(
-          height: 40,
-          decoration: const BoxDecoration(color: AppTheme.pink),
-          child: Text(
-            'Permitir',
-            style: AppTheme.bodyRegular.copyWith(
-              color: AppTheme.bodyText,
-            ),
-          ),
+        AppButton(
+          text: 'Permitir',
+          onPressed: () {},
         ),
       ],
     ),

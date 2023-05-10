@@ -61,6 +61,7 @@ class AppBottomSheet extends StatelessWidget {
                   style: AppTheme.bodyRegular.copyWith(
                     color: AppTheme.bodyText,
                   ),
+                  textAlign: TextAlign.justify,
                 ),
               ],
             ),
@@ -71,32 +72,17 @@ class AppBottomSheet extends StatelessWidget {
                 const SizedBox(
                   height: 32,
                 ),
-                // SizedBox(
-                //   height: 40,
-                //   child: ListView.separated(
-                //     scrollDirection: Axis.horizontal,
-                //     itemCount: actions.length,
-                //     itemBuilder: (context, index) {
-                //       return actions[index];
-                //     },
-                //     separatorBuilder: (context, index) {
-                //       return const SizedBox(
-                //         width: 16,
-                //       );
-                //     },
-                //   ),
-                // ),
                 Row(
                   children: actions.map((action) {
-                    if (actions.indexOf(action) % 2 == 0) {
+                    if (actions.indexOf(action) >= 1) {
                       return Expanded(
                         child: Row(
                           children: [
-                            Expanded(
-                              child: action,
-                            ),
                             const SizedBox(
                               width: 16,
+                            ),
+                            Expanded(
+                              child: action,
                             ),
                           ],
                         ),
