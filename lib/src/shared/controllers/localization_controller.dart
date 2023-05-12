@@ -21,31 +21,35 @@ class LocalizationController extends ChangeNotifier {
 
   void handleLocalizationToggle(bool value) async {
     if (value) {
-      final PermissionStatus status = await Permission.locationWhenInUse.status;
-
-      if (status.isGranted) {
-        _isPermissionEnabled = true;
-        notifyListeners();
-
-        return;
-      }
-
-      if (status.isPermanentlyDenied) {
-        debugPrint('Settings should open');
-        return;
-      }
-
-      final PermissionStatus requestStatus =
-          await Permission.locationWhenInUse.request();
-
-      if (requestStatus.isGranted) {
-        _isPermissionEnabled = true;
-        notifyListeners();
-
-        return;
-      }
+      requestPermission();
     } else {
-      debugPrint('Settings should open');
+      openAppSettings();
+    }
+  }
+
+  Future<void> requestPermission() async {
+    final PermissionStatus status = await Permission.locationWhenInUse.status;
+
+    if (status.isGranted) {
+      _isPermissionEnabled = true;
+      notifyListeners();
+
+      return;
+    }
+
+    if (status.isPermanentlyDenied) {
+      openAppSettings();
+      return;
+    }
+
+    final PermissionStatus requestStatus =
+        await Permission.locationWhenInUse.request();
+
+    if (requestStatus.isGranted) {
+      _isPermissionEnabled = true;
+      notifyListeners();
+
+      return;
     }
   }
 }

@@ -21,7 +21,7 @@ class SkipButton extends StatelessWidget {
               if (!controller.isLocalizationEnabled) {
                 showLocalizationWarning(context);
               } else {
-                //
+                // Redirect to home
               }
             },
             child: Text(

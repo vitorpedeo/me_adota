@@ -21,7 +21,7 @@ class NextPageButton extends StatelessWidget {
             } else if (!controller.isLocalizationEnabled) {
               showLocalizationWarning(context);
             } else {
-              //
+              // Redirect to home
             }
           },
           style: ElevatedButton.styleFrom(

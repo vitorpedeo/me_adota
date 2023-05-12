@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:me_adota/src/shared/controllers/localization_controller.dart';
 import 'package:me_adota/src/shared/widgets/app_bottom_sheet.dart';
 import 'package:me_adota/src/shared/widgets/app_button.dart';
+import 'package:provider/provider.dart';
 
 Future<dynamic> showLocalizationWarning(BuildContext context) {
   return showModalBottomSheet(
@@ -13,11 +15,22 @@ Future<dynamic> showLocalizationWarning(BuildContext context) {
         AppButton(
           text: 'Ignorar',
           variant: AppButtonVariant.secondary,
-          onPressed: () {},
+          onPressed: () {
+            // Redirect to home
+          },
         ),
         AppButton(
           text: 'Permitir',
-          onPressed: () {},
+          onPressed: () async {
+            final controller = context.read<LocalizationController>();
+
+            await controller.requestPermission();
+
+            if (context.mounted) {
+              Navigator.of(context).pop();
+              // Redirect to home
+            }
+          },
         ),
       ],
     ),
