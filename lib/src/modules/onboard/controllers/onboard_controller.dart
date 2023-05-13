@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:me_adota/src/modules/onboard/models/onboarding_content_model.dart';
 import 'package:me_adota/src/modules/onboard/widgets/localization_switcher.dart';
 import 'package:me_adota/src/shared/controllers/localization_controller.dart';
 import 'package:me_adota/src/shared/styles/svgs.dart';
-import 'package:permission_handler/permission_handler.dart';
 
 class OnboardController extends ChangeNotifier {
   final LocalizationController localizationController;
@@ -64,9 +64,10 @@ class OnboardController extends ChangeNotifier {
   }
 
   Future<bool> canSkipOnboard() async {
-    final PermissionStatus status = await Permission.locationWhenInUse.status;
+    final LocationPermission status = await Geolocator.checkPermission();
 
-    if (status == PermissionStatus.denied &&
+    if ((status == LocationPermission.denied ||
+            status == LocationPermission.deniedForever) &&
         localizationController.permissionDeniedCount < 1) {
       return false;
     } else {

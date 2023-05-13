@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:permission_handler/permission_handler.dart';
+import 'package:geolocator/geolocator.dart';
 
 class LocalizationController extends ChangeNotifier {
   bool _isPermissionEnabled = false;
@@ -13,9 +13,9 @@ class LocalizationController extends ChangeNotifier {
   }
 
   void checkPermission() async {
-    final PermissionStatus status = await Permission.locationWhenInUse.status;
+    final LocationPermission status = await Geolocator.checkPermission();
 
-    if (status.isGranted) {
+    if (status == LocationPermission.whileInUse) {
       _isPermissionEnabled = true;
       notifyListeners();
     }
@@ -25,23 +25,25 @@ class LocalizationController extends ChangeNotifier {
     if (value) {
       requestPermission();
     } else {
-      openAppSettings();
+      Geolocator.openAppSettings();
     }
   }
 
   Future<void> requestPermission() async {
-    PermissionStatus status = await Permission.locationWhenInUse.status;
+    LocationPermission status = await Geolocator.checkPermission();
 
-    if (status.isPermanentlyDenied || _permissionDeniedCount > 1) {
-      await openAppSettings();
+    if (status == LocationPermission.deniedForever ||
+        _permissionDeniedCount > 1) {
+      await Geolocator.openAppSettings();
     } else {
-      await Permission.locationWhenInUse.request();
+      await Geolocator.requestPermission();
     }
 
-    status = await Permission.locationWhenInUse.status;
-    _permissionDeniedCount = status.isDenied ? _permissionDeniedCount + 1 : 0;
+    status = await Geolocator.checkPermission();
+    _permissionDeniedCount =
+        status == LocationPermission.denied ? _permissionDeniedCount + 1 : 0;
 
-    _isPermissionEnabled = status.isGranted;
+    _isPermissionEnabled = status == LocationPermission.whileInUse;
     notifyListeners();
   }
 }
