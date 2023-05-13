@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:me_adota/providers.dart';
-import 'package:me_adota/src/modules/onboard/pages/onboard_page.dart';
+import 'package:me_adota/src/core/routes/routes.dart';
 import 'package:provider/provider.dart';
 
 class App extends StatelessWidget {
@@ -10,9 +10,9 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: AppProviders.all,
-      child: const MaterialApp(
+      child: MaterialApp.router(
         title: 'Me Adota',
-        home: OnboardPage(),
+        routerConfig: AppRouter.router,
       ),
     );
   }
