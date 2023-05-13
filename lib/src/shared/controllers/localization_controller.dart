@@ -3,14 +3,16 @@ import 'package:permission_handler/permission_handler.dart';
 
 class LocalizationController extends ChangeNotifier {
   bool _isPermissionEnabled = false;
+  int _permissionDeniedCount = 0;
 
   bool get isPermissionEnabled => _isPermissionEnabled;
+  int get permissionDeniedCount => _permissionDeniedCount;
 
   LocalizationController() {
-    checkInitialPermission();
+    checkPermission();
   }
 
-  void checkInitialPermission() async {
+  void checkPermission() async {
     final PermissionStatus status = await Permission.locationWhenInUse.status;
 
     if (status.isGranted) {
@@ -28,28 +30,18 @@ class LocalizationController extends ChangeNotifier {
   }
 
   Future<void> requestPermission() async {
-    final PermissionStatus status = await Permission.locationWhenInUse.status;
+    PermissionStatus status = await Permission.locationWhenInUse.status;
 
-    if (status.isGranted) {
-      _isPermissionEnabled = true;
-      notifyListeners();
-
-      return;
+    if (status.isPermanentlyDenied || _permissionDeniedCount > 1) {
+      await openAppSettings();
+    } else {
+      await Permission.locationWhenInUse.request();
     }
 
-    if (status.isPermanentlyDenied) {
-      openAppSettings();
-      return;
-    }
+    status = await Permission.locationWhenInUse.status;
+    _permissionDeniedCount = status.isDenied ? _permissionDeniedCount + 1 : 0;
 
-    final PermissionStatus requestStatus =
-        await Permission.locationWhenInUse.request();
-
-    if (requestStatus.isGranted) {
-      _isPermissionEnabled = true;
-      notifyListeners();
-
-      return;
-    }
+    _isPermissionEnabled = status.isGranted;
+    notifyListeners();
   }
 }

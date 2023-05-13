@@ -19,13 +19,17 @@ class SkipButton extends StatelessWidget {
             milliseconds: 200,
           ),
           child: GestureDetector(
-            onTap: () {
-              if (!controller.isLocalizationEnabled) {
-                showLocalizationWarning(context);
-              } else {
-                context.goNamed(
-                  AppRoutesConfig.home.name,
-                );
+            onTap: () async {
+              final bool canSkip = await controller.canSkipOnboard();
+
+              if (context.mounted) {
+                if (!canSkip) {
+                  showLocalizationWarning(context);
+                } else {
+                  context.goNamed(
+                    AppRoutesConfig.home.name,
+                  );
+                }
               }
             },
             child: Text(

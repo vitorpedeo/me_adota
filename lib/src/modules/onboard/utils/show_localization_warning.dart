@@ -35,9 +35,6 @@ Future<dynamic> showLocalizationWarning(BuildContext context) {
 
             if (context.mounted) {
               Navigator.of(context).pop();
-              context.goNamed(
-                AppRoutesConfig.home.name,
-              );
             }
           },
         ),

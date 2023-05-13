@@ -17,15 +17,22 @@ class NextPageButton extends StatelessWidget {
     return Consumer<OnboardController>(
       builder: (context, controller, child) {
         return ElevatedButton(
-          onPressed: () {
+          onPressed: () async {
             if (!controller.isLastPage) {
               controller.nextPage();
-            } else if (!controller.isLocalizationEnabled) {
-              showLocalizationWarning(context);
-            } else {
-              context.goNamed(
-                AppRoutesConfig.home.name,
-              );
+              return;
+            }
+
+            final bool canSkip = await controller.canSkipOnboard();
+
+            if (context.mounted) {
+              if (!canSkip) {
+                showLocalizationWarning(context);
+              } else {
+                context.goNamed(
+                  AppRoutesConfig.home.name,
+                );
+              }
             }
           },
           style: ElevatedButton.styleFrom(

@@ -25,7 +25,7 @@ class _OnboardPageState extends State<OnboardPage> with WidgetsBindingObserver {
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (state == AppLifecycleState.resumed) {
       final controller = context.read<LocalizationController>();
-      controller.checkInitialPermission();
+      controller.checkPermission();
     }
   }
 
