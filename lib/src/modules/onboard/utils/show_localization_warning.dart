@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:me_adota/src/core/routes/config.dart';
 import 'package:me_adota/src/shared/controllers/localization_controller.dart';
 import 'package:me_adota/src/shared/widgets/app_bottom_sheet.dart';
 import 'package:me_adota/src/shared/widgets/app_button.dart';
@@ -16,7 +18,12 @@ Future<dynamic> showLocalizationWarning(BuildContext context) {
           text: 'Ignorar',
           variant: AppButtonVariant.secondary,
           onPressed: () {
-            // Redirect to home
+            if (context.mounted) {
+              Navigator.of(context).pop();
+              context.goNamed(
+                AppRoutesConfig.home.name,
+              );
+            }
           },
         ),
         AppButton(
@@ -28,7 +35,9 @@ Future<dynamic> showLocalizationWarning(BuildContext context) {
 
             if (context.mounted) {
               Navigator.of(context).pop();
-              // Redirect to home
+              context.goNamed(
+                AppRoutesConfig.home.name,
+              );
             }
           },
         ),

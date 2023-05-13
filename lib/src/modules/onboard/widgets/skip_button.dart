@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:me_adota/src/core/routes/config.dart';
 import 'package:me_adota/src/modules/onboard/controllers/onboard_controller.dart';
 import 'package:me_adota/src/modules/onboard/utils/show_localization_warning.dart';
 import 'package:me_adota/src/shared/styles/theme.dart';
@@ -21,7 +23,9 @@ class SkipButton extends StatelessWidget {
               if (!controller.isLocalizationEnabled) {
                 showLocalizationWarning(context);
               } else {
-                // Redirect to home
+                context.goNamed(
+                  AppRoutesConfig.home.name,
+                );
               }
             },
             child: Text(

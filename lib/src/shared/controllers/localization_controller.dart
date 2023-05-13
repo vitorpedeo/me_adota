@@ -51,10 +51,5 @@ class LocalizationController extends ChangeNotifier {
 
       return;
     }
-
-    if (requestStatus.isPermanentlyDenied) {
-      openAppSettings();
-      return;
-    }
   }
 }
