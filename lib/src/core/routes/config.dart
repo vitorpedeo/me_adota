@@ -17,4 +17,16 @@ class AppRoutesConfig {
     name: 'home',
     path: '/home',
   );
+  static const AppRouteConfig search = AppRouteConfig(
+    name: 'search',
+    path: '/search',
+  );
+  static const AppRouteConfig adoptions = AppRouteConfig(
+    name: 'adoptions',
+    path: '/adoptions',
+  );
+  static const AppRouteConfig account = AppRouteConfig(
+    name: 'account',
+    path: '/account',
+  );
 }
