@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:me_adota/src/core/routes/config.dart';
+import 'package:me_adota/src/shared/styles/theme.dart';
 import 'package:me_adota/src/shared/widgets/app_scaffold_with_navbar/navbar_item.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
@@ -17,29 +18,49 @@ class _AppScaffoldWithNavbarState extends State<AppScaffoldWithNavbar> {
   final List<NavbarItem> tabs = [
     NavbarItem(
       path: AppRoutesConfig.home.path,
-      icon: PhosphorIcon(
-        PhosphorIcons.regular.houseSimple,
+      icon: Padding(
+        padding: const EdgeInsets.only(
+          bottom: 4,
+        ),
+        child: PhosphorIcon(
+          PhosphorIcons.bold.house,
+        ),
       ),
       label: 'Início',
     ),
     NavbarItem(
       path: AppRoutesConfig.search.path,
-      icon: PhosphorIcon(
-        PhosphorIcons.regular.magnifyingGlassMinus,
+      icon: Padding(
+        padding: const EdgeInsets.only(
+          bottom: 4,
+        ),
+        child: PhosphorIcon(
+          PhosphorIcons.bold.magnifyingGlass,
+        ),
       ),
       label: 'Pesquisar',
     ),
     NavbarItem(
       path: AppRoutesConfig.adoptions.path,
-      icon: PhosphorIcon(
-        PhosphorIcons.regular.handHeart,
+      icon: Padding(
+        padding: const EdgeInsets.only(
+          bottom: 4,
+        ),
+        child: PhosphorIcon(
+          PhosphorIcons.bold.handHeart,
+        ),
       ),
       label: 'Adoções',
     ),
     NavbarItem(
       path: AppRoutesConfig.account.path,
-      icon: PhosphorIcon(
-        PhosphorIcons.regular.person,
+      icon: Padding(
+        padding: const EdgeInsets.only(
+          bottom: 4,
+        ),
+        child: PhosphorIcon(
+          PhosphorIcons.bold.user,
+        ),
       ),
       label: 'Conta',
     ),
@@ -66,6 +87,22 @@ class _AppScaffoldWithNavbarState extends State<AppScaffoldWithNavbar> {
     return Scaffold(
       body: widget.child,
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: AppTheme.white,
+        selectedItemColor: AppTheme.pink,
+        selectedIconTheme: const IconThemeData(
+          size: 24,
+        ),
+        selectedLabelStyle: AppTheme.overlineBold.copyWith(
+          color: AppTheme.pink,
+        ),
+        unselectedItemColor: AppTheme.bodySecondaryText,
+        unselectedIconTheme: const IconThemeData(
+          size: 24,
+        ),
+        unselectedLabelStyle: AppTheme.overlineBold.copyWith(
+          color: AppTheme.bodySecondaryText,
+        ),
+        type: BottomNavigationBarType.fixed,
         currentIndex: _currentIndex,
         items: tabs,
         onTap: (tabIndex) => _onItemTapped(tabIndex),
