@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:me_adota/src/core/routes/config.dart';
+import 'package:me_adota/src/modules/onboard/controllers/onboard_controller.dart';
 import 'package:me_adota/src/shared/controllers/localization_controller.dart';
 import 'package:me_adota/src/shared/widgets/app_bottom_sheet.dart';
 import 'package:me_adota/src/shared/widgets/app_button.dart';
@@ -17,7 +18,13 @@ Future<dynamic> showLocalizationWarning(BuildContext context) {
         AppButton(
           text: 'Ignorar',
           variant: AppButtonVariant.secondary,
-          onPressed: () {
+          onPressed: () async {
+            final controller = context.read<OnboardController>();
+
+            await controller.updateFirstTimeAccess(
+              value: false,
+            );
+
             if (context.mounted) {
               Navigator.of(context).pop();
               context.goNamed(

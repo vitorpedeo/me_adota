@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:me_adota/src/core/services/local_storage_service.dart';
 import 'package:me_adota/src/modules/onboard/models/onboarding_content_model.dart';
 import 'package:me_adota/src/modules/onboard/widgets/localization_switcher.dart';
 import 'package:me_adota/src/shared/controllers/localization_controller.dart';
@@ -71,8 +72,16 @@ class OnboardController extends ChangeNotifier {
         localizationController.permissionDeniedCount < 1) {
       return false;
     } else {
+      await updateFirstTimeAccess(
+        value: false,
+      );
       return true;
     }
+  }
+
+  Future<void> updateFirstTimeAccess({bool? value}) async {
+    await LocalStorageService.setBool(
+        '@me_adota:is_first_time', value ?? false);
   }
 
   @override
