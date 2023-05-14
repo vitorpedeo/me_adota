@@ -80,8 +80,7 @@ class OnboardController extends ChangeNotifier {
   }
 
   Future<void> updateFirstTimeAccess({bool? value}) async {
-    await LocalStorageService.setBool(
-        '@me_adota:is_first_time', value ?? false);
+    await LocalStorageService.setBool(Keys.isFirstTime, value ?? false);
   }
 
   @override

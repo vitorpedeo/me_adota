@@ -1,5 +1,9 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
+class Keys {
+  static const isFirstTime = '@me_adota:is_first_time';
+}
+
 class LocalStorageService {
   static late final SharedPreferences _instance;
 
