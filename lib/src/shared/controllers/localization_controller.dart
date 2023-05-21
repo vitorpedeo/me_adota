@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:me_adota/src/shared/models/user_location_model.dart';
 
 class LocalizationController extends ChangeNotifier {
   bool _isPermissionEnabled = false;
@@ -45,5 +46,28 @@ class LocalizationController extends ChangeNotifier {
 
     _isPermissionEnabled = status == LocationPermission.whileInUse;
     notifyListeners();
+  }
+
+  Future<UserLocation> getUserLocation() async {
+    final LocationPermission status = await Geolocator.checkPermission();
+
+    if (status == LocationPermission.whileInUse) {
+      final Position position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high,
+      );
+
+      debugPrint('LATITUDE: ${position.latitude}');
+      debugPrint('LONGITUDE: ${position.longitude}');
+      return UserLocation(
+        city: 'São Paulo',
+        state: 'São Paulo',
+      );
+    } else {
+      // Default city and state
+      return UserLocation(
+        city: 'Goiânia',
+        state: 'Goiás',
+      );
+    }
   }
 }

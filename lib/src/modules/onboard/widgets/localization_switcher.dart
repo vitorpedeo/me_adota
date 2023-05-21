@@ -1,6 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:me_adota/src/modules/onboard/controllers/onboard_controller.dart';
 import 'package:me_adota/src/shared/controllers/localization_controller.dart';
 import 'package:me_adota/src/shared/styles/theme.dart';
 import 'package:provider/provider.dart';
@@ -35,7 +33,7 @@ class LocalizationSwitcher extends StatelessWidget {
               height: 1,
             ),
           ),
-          Container(
+          SizedBox(
             height: 32,
             child: FittedBox(
               fit: BoxFit.contain,

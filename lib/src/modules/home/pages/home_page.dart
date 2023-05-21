@@ -1,8 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:me_adota/src/modules/home/controllers/home_controller.dart';
+import 'package:me_adota/src/modules/home/widgets/current_location.dart';
 import 'package:me_adota/src/shared/styles/theme.dart';
+import 'package:provider/provider.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  @override
+  void initState() {
+    super.initState();
+
+    final controller = context.read<HomeController>();
+    controller.loadHome();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -18,14 +34,33 @@ class HomePage extends StatelessWidget {
           ),
           width: double.infinity,
           height: double.infinity,
-          child: Center(
-            child: Text(
-              'Home Page',
-              style: AppTheme.headlineBold.copyWith(
-                color: AppTheme.headText,
-              ),
-            ),
-          ),
+          child:
+              Consumer<HomeController>(builder: (context, controller, child) {
+            if (controller.status == HomeState.idle) {
+              return const SizedBox.shrink();
+            }
+
+            if (controller.status == HomeState.loading) {
+              return const Center(
+                child: CircularProgressIndicator(
+                  color: AppTheme.pink,
+                ),
+              );
+            }
+
+            if (controller.status == HomeState.error) {
+              return const Center(
+                child: Text('Erro ao carregar dados'),
+              );
+            }
+
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: const [
+                CurrentLocation(),
+              ],
+            );
+          }),
         ),
       ),
     );
