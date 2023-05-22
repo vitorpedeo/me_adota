@@ -5,9 +5,7 @@ import 'package:provider/single_child_widget.dart';
 class OnboardProvider {
   static final List<SingleChildWidget> all = [
     ChangeNotifierProvider<OnboardController>(
-      create: (context) => OnboardController(
-        localizationController: context.read(),
-      ),
+      create: (context) => OnboardController(),
     ),
   ];
 }

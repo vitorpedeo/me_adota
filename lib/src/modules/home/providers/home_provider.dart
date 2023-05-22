@@ -7,7 +7,7 @@ class HomeProvider {
     ChangeNotifierProvider<HomeController>(
       create: (context) => HomeController(
         localizationController: context.read(),
-      ),
+      )..loadHome(),
     ),
   ];
 }

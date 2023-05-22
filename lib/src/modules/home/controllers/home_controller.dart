@@ -11,7 +11,6 @@ enum HomeState {
 
 class HomeController extends ChangeNotifier {
   HomeState _status = HomeState.idle;
-  late UserLocation _userLocation;
 
   final LocalizationController localizationController;
 
@@ -20,16 +19,19 @@ class HomeController extends ChangeNotifier {
   });
 
   HomeState get status => _status;
-  UserLocation get userLocation => _userLocation;
+  UserLocation get userLocation => localizationController.userLocation;
 
   Future<void> loadHome() async {
     try {
       _status = HomeState.loading;
-      _userLocation = await localizationController.getUserLocation();
+      notifyListeners();
+
+      debugPrint('loading home...');
+
       _status = HomeState.success;
+      notifyListeners();
     } catch (e) {
       _status = HomeState.error;
-    } finally {
       notifyListeners();
     }
   }

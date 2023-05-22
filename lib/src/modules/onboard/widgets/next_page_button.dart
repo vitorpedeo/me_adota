@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:me_adota/src/core/routes/config.dart';
 import 'package:me_adota/src/modules/onboard/controllers/onboard_controller.dart';
-import 'package:me_adota/src/modules/onboard/utils/show_localization_warning.dart';
 import 'package:me_adota/src/shared/styles/theme.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:provider/provider.dart';
@@ -23,16 +22,12 @@ class NextPageButton extends StatelessWidget {
               return;
             }
 
-            final bool canSkip = await controller.canSkipOnboard();
+            await controller.updateFirstTimeAccess();
 
             if (context.mounted) {
-              if (!canSkip) {
-                showLocalizationWarning(context);
-              } else {
-                context.goNamed(
-                  AppRoutesConfig.home.name,
-                );
-              }
+              context.goNamed(
+                AppRoutesConfig.home.name,
+              );
             }
           },
           style: ElevatedButton.styleFrom(

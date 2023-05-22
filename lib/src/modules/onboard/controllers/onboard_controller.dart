@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:me_adota/src/core/services/local_storage_service.dart';
 import 'package:me_adota/src/modules/onboard/models/onboarding_content_model.dart';
-import 'package:me_adota/src/modules/onboard/widgets/localization_switcher.dart';
-import 'package:me_adota/src/shared/controllers/localization_controller.dart';
 import 'package:me_adota/src/shared/styles/svgs.dart';
 
 class OnboardController extends ChangeNotifier {
-  final LocalizationController localizationController;
   final PageController _pageController = PageController(
     initialPage: 0,
   );
@@ -27,29 +23,19 @@ class OnboardController extends ChangeNotifier {
     OnboardingContent(
       title: 'Encontre pets mais próximos de você',
       description:
-          'Permita que o Me Adota acesse sua localização e encontre animais próximos a você.',
+          'O Me Adota facilita a encontrar animais mais próximos da sua região!',
       image: AppSvgs.cat1,
-      extraWidget: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: const [
-          SizedBox(
-            height: 16,
-          ),
-          LocalizationSwitcher(),
-        ],
-      ),
     ),
   ];
   int _currentPageIndex = 0;
 
-  OnboardController({required this.localizationController});
+  OnboardController();
 
   PageController get pageController => _pageController;
   List<OnboardingContent> get onboardContentList => _onboardContentList;
   int get currentPageIndex => _currentPageIndex;
   int get pagesQuantity => _onboardContentList.length;
   bool get isLastPage => _currentPageIndex == _onboardContentList.length - 1;
-  bool get isLocalizationEnabled => localizationController.isPermissionEnabled;
 
   void changePage(int newPage) {
     _currentPageIndex = newPage;
@@ -62,21 +48,6 @@ class OnboardController extends ChangeNotifier {
       curve: Curves.easeInOut,
     );
     notifyListeners();
-  }
-
-  Future<bool> canSkipOnboard() async {
-    final LocationPermission status = await Geolocator.checkPermission();
-
-    if ((status == LocationPermission.denied ||
-            status == LocationPermission.deniedForever) &&
-        localizationController.permissionDeniedCount < 1) {
-      return false;
-    } else {
-      await updateFirstTimeAccess(
-        value: false,
-      );
-      return true;
-    }
   }
 
   Future<void> updateFirstTimeAccess({bool? value}) async {
