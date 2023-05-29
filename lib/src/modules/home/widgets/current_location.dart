@@ -3,7 +3,7 @@ import 'package:me_adota/src/modules/home/controllers/home_controller.dart';
 import 'package:me_adota/src/shared/styles/theme.dart';
 import 'package:me_adota/src/shared/widgets/app_bottom_sheet.dart';
 import 'package:me_adota/src/shared/widgets/app_button.dart';
-import 'package:me_adota/src/shared/widgets/app_select_input.dart';
+import 'package:me_adota/src/shared/widgets/app_dialog_select/app_dialog_select.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:provider/provider.dart';
 
@@ -17,25 +17,19 @@ class CurrentLocation extends StatelessWidget {
         return AppBottomSheet(
           title: 'Minha localização',
           content: Row(
-            children: [
+            children: const [
               Expanded(
-                child: AppSelectInput<String>(
-                  hint: 'Estado',
-                  items: const [],
-                  label: (val) => val,
-                  onChanged: (val) {},
+                child: AppDialogSelect(
+                  label: 'Estado',
                 ),
               ),
-              const SizedBox(
+              SizedBox(
                 width: 8,
               ),
               Expanded(
                 flex: 2,
-                child: AppSelectInput<String>(
-                  hint: 'Cidade',
-                  items: const [],
-                  label: (val) => val,
-                  onChanged: (val) {},
+                child: AppDialogSelect(
+                  label: 'Cidade',
                 ),
               ),
             ],
