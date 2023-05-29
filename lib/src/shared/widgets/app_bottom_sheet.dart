@@ -4,12 +4,14 @@ import 'package:me_adota/src/shared/styles/theme.dart';
 class AppBottomSheet extends StatelessWidget {
   final String title;
   final String? description;
+  final Widget? content;
   final List<Widget> actions;
 
   const AppBottomSheet(
       {super.key,
       required this.title,
       this.description,
+      this.content,
       this.actions = const []});
 
   @override
@@ -63,6 +65,16 @@ class AppBottomSheet extends StatelessWidget {
                   ),
                   textAlign: TextAlign.justify,
                 ),
+              ],
+            ),
+          if (content != null)
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(
+                  height: 32,
+                ),
+                content!,
               ],
             ),
           if (actions.isNotEmpty)

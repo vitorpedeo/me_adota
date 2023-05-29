@@ -1,16 +1,70 @@
 import 'package:flutter/material.dart';
 import 'package:me_adota/src/modules/home/controllers/home_controller.dart';
 import 'package:me_adota/src/shared/styles/theme.dart';
+import 'package:me_adota/src/shared/widgets/app_bottom_sheet.dart';
+import 'package:me_adota/src/shared/widgets/app_button.dart';
+import 'package:me_adota/src/shared/widgets/app_select_input.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:provider/provider.dart';
 
 class CurrentLocation extends StatelessWidget {
   const CurrentLocation({super.key});
 
+  void _showChangeLocationBottomSheet(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      builder: (_) {
+        return AppBottomSheet(
+          title: 'Minha localização',
+          content: Row(
+            children: [
+              Expanded(
+                child: AppSelectInput<String>(
+                  hint: 'Estado',
+                  items: const [],
+                  label: (val) => val,
+                  onChanged: (val) {},
+                ),
+              ),
+              const SizedBox(
+                width: 8,
+              ),
+              Expanded(
+                flex: 2,
+                child: AppSelectInput<String>(
+                  hint: 'Cidade',
+                  items: const [],
+                  label: (val) => val,
+                  onChanged: (val) {},
+                ),
+              ),
+            ],
+          ),
+          actions: [
+            AppButton(
+              text: 'Confirmar',
+              onPressed: () {},
+            ),
+          ],
+        );
+      },
+      isScrollControlled: true,
+      useRootNavigator: true,
+      backgroundColor: AppTheme.white,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(
+          top: Radius.circular(32),
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        _showChangeLocationBottomSheet(context);
+      },
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisSize: MainAxisSize.min,
