@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:me_adota/src/modules/home/controllers/home_controller.dart';
+import 'package:me_adota/src/shared/constants/brazil_states_constant.dart';
 import 'package:me_adota/src/shared/styles/theme.dart';
 import 'package:me_adota/src/shared/widgets/app_bottom_sheet.dart';
 import 'package:me_adota/src/shared/widgets/app_button.dart';
@@ -17,16 +18,17 @@ class CurrentLocation extends StatelessWidget {
         return AppBottomSheet(
           title: 'Minha localização',
           content: Row(
-            children: const [
+            children: [
               Expanded(
-                child: AppDialogSelect(
+                child: AppDialogSelect<String>(
                   label: 'Estado',
+                  options: BrazilStates.all,
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 8,
               ),
-              Expanded(
+              const Expanded(
                 flex: 2,
                 child: AppDialogSelect(
                   label: 'Cidade',

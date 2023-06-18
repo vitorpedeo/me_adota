@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:me_adota/src/shared/styles/theme.dart';
 import 'package:me_adota/src/shared/widgets/app_dialog_select/app_dialog.dart';
+import 'package:me_adota/src/shared/models/option_model.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 /**
@@ -8,10 +9,15 @@ import 'package:phosphor_flutter/phosphor_flutter.dart';
  *   https://www.youtube.com/watch?v=Ldg_TO988no
  */
 
-class AppDialogSelect extends StatelessWidget {
+class AppDialogSelect<T> extends StatelessWidget {
   final String label;
+  final List<Option<T>> options;
 
-  const AppDialogSelect({super.key, required this.label});
+  const AppDialogSelect({
+    super.key,
+    required this.label,
+    this.options = const [],
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +58,9 @@ class AppDialogSelect extends StatelessWidget {
     await showDialog(
       context: context,
       builder: (_) {
-        return const AppDialog();
+        return AppDialog(
+          options: options,
+        );
       },
     );
   }
