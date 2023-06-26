@@ -10,7 +10,7 @@ import 'package:phosphor_flutter/phosphor_flutter.dart';
  *   https://www.youtube.com/watch?v=Ldg_TO988no
  */
 
-class AppDialogSelect<T> extends StatefulWidget {
+class AppDialogSelect<T> extends StatelessWidget {
   final String label;
   final List<Option<T>> options;
 
@@ -19,22 +19,6 @@ class AppDialogSelect<T> extends StatefulWidget {
     required this.label,
     this.options = const [],
   });
-
-  @override
-  State<AppDialogSelect<T>> createState() => _AppDialogSelectState<T>();
-}
-
-class _AppDialogSelectState<T> extends State<AppDialogSelect<T>> {
-  List<Option<T>> _allOptions = [];
-  List<Option<T>> _filteredOptions = [];
-
-  @override
-  void initState() {
-    super.initState();
-
-    _allOptions = widget.options;
-    _filteredOptions = widget.options;
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +39,7 @@ class _AppDialogSelectState<T> extends State<AppDialogSelect<T>> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              widget.label,
+              label,
               style: AppTheme.bodySecondaryRegular.copyWith(
                 color: AppTheme.bodySecondaryText,
               ),
@@ -75,83 +59,92 @@ class _AppDialogSelectState<T> extends State<AppDialogSelect<T>> {
     await showDialog(
       context: context,
       builder: (_) {
+        List<Option<T>> filteredOptions = options;
+
         return AppDialog(
-          child: Column(
-            children: [
-              AppTextInput(
-                hintText: 'Filtrar opções',
-                onChanged: (value) {
-                  if (value.isEmpty) {
-                    setState(() {
-                      _filteredOptions = _allOptions;
-                    });
+          child: StatefulBuilder(
+            builder: (context, setState) {
+              return Column(
+                children: [
+                  AppTextInput(
+                    hintText: 'Filtrar opções',
+                    onChanged: (value) {
+                      if (value.isEmpty) {
+                        setState(() {
+                          filteredOptions = options;
+                        });
 
-                    return;
-                  }
+                        return;
+                      }
 
-                  setState(() {
-                    _filteredOptions = _allOptions
-                        .where((element) => element.label
-                            .toLowerCase()
-                            .contains(value.toLowerCase()))
-                        .toList();
-                  });
-                },
-              ),
-              const SizedBox(
-                height: 24,
-              ),
-              SizedBox(
-                height: 200,
-                child: ListView.separated(
-                    itemCount: _filteredOptions.length,
-                    separatorBuilder: (context, index) => const Divider(
-                          height: 1,
-                          color: Color.fromARGB(255, 240, 235, 235),
-                        ),
-                    itemBuilder: (context, index) {
-                      return InkWell(
-                        onTap: () {
-                          debugPrint('Value: ${_filteredOptions[index].value}');
-                        },
-                        child: Ink(
-                          padding: const EdgeInsets.all(16),
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
+                      setState(() {
+                        filteredOptions = options
+                            .where((element) => element.label
+                                .toLowerCase()
+                                .contains(value.toLowerCase()))
+                            .toList();
+                      });
+                    },
+                  ),
+                  const SizedBox(
+                    height: 24,
+                  ),
+                  SizedBox(
+                    height: 200,
+                    child: ListView.separated(
+                        itemCount: filteredOptions.length,
+                        separatorBuilder: (context, index) => const Divider(
+                              height: 1,
+                              color: Color.fromARGB(255, 240, 235, 235),
+                            ),
+                        itemBuilder: (context, index) {
+                          return InkWell(
+                            onTap: () {
+                              debugPrint(
+                                  'Value: ${filteredOptions[index].value}');
+                            },
+                            child: Ink(
+                              padding: const EdgeInsets.all(16),
+                              child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
+                                  Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      PhosphorIcon(
+                                        PhosphorIcons.bold.mapPin,
+                                        size: 20,
+                                        color: AppTheme.pink,
+                                      ),
+                                      const SizedBox(
+                                        width: 12,
+                                      ),
+                                      Text(
+                                        filteredOptions[index].label,
+                                        style: AppTheme.bodyRegular.copyWith(
+                                          color: AppTheme.bodyText,
+                                          height: 0,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                   PhosphorIcon(
-                                    PhosphorIcons.bold.mapPin,
+                                    PhosphorIcons.bold.caretRight,
                                     size: 20,
                                     color: AppTheme.pink,
                                   ),
-                                  const SizedBox(
-                                    width: 12,
-                                  ),
-                                  Text(
-                                    widget.options[index].label,
-                                    style: AppTheme.bodyRegular.copyWith(
-                                      color: AppTheme.bodyText,
-                                      height: 0,
-                                    ),
-                                  ),
                                 ],
                               ),
-                              PhosphorIcon(
-                                PhosphorIcons.bold.caretRight,
-                                size: 20,
-                                color: AppTheme.pink,
-                              ),
-                            ],
-                          ),
-                        ),
-                      );
-                    }),
-              ),
-            ],
+                            ),
+                          );
+                        }),
+                  ),
+                ],
+              );
+            },
           ),
         );
       },
