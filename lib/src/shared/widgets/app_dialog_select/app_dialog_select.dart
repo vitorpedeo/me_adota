@@ -82,6 +82,17 @@ class AppDialogSelect<T> extends StatelessWidget {
                   height: 200,
                   child: Consumer<AppDialogSelectController<T>>(
                       builder: (context, controller, child) {
+                    if (controller.filteredOptions.isEmpty) {
+                      return Center(
+                        child: Text(
+                          'Nenhuma opção encontrada',
+                          style: AppTheme.bodyRegular.copyWith(
+                            color: AppTheme.bodySecondaryText,
+                          ),
+                        ),
+                      );
+                    }
+
                     return ListView.separated(
                         itemCount: controller.filteredOptions.length,
                         separatorBuilder: (context, index) => const Divider(

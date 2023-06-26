@@ -1,3 +1,4 @@
+import 'package:diacritic/diacritic.dart';
 import 'package:flutter/material.dart';
 import 'package:me_adota/src/shared/models/option_model.dart';
 
@@ -23,8 +24,9 @@ class AppDialogSelectController<T> extends ChangeNotifier {
     }
 
     _filteredOptions = options
-        .where((element) =>
-            element.label.toLowerCase().contains(value.toLowerCase()))
+        .where((element) => removeDiacritics(element.label)
+            .toLowerCase()
+            .contains(removeDiacritics(value).toLowerCase()))
         .toList();
 
     notifyListeners();
