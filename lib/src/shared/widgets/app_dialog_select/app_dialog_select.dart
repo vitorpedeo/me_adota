@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:me_adota/src/shared/styles/theme.dart';
 import 'package:me_adota/src/shared/widgets/app_dialog_select/app_dialog.dart';
 import 'package:me_adota/src/shared/models/option_model.dart';
+import 'package:me_adota/src/shared/widgets/app_dialog_select/app_dialog_select_controller.dart';
 import 'package:me_adota/src/shared/widgets/app_text_input.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
+import 'package:provider/provider.dart';
 
 /**
  *  TODO: Implement AppDialogSelect. Use this video as a reference:
@@ -13,12 +15,17 @@ import 'package:phosphor_flutter/phosphor_flutter.dart';
 class AppDialogSelect<T> extends StatelessWidget {
   final String label;
   final List<Option<T>> options;
+  late final AppDialogSelectController<T> controller;
 
-  const AppDialogSelect({
+  AppDialogSelect({
     super.key,
     required this.label,
     this.options = const [],
-  });
+  }) {
+    controller = AppDialogSelectController(
+      options: options,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -59,40 +66,24 @@ class AppDialogSelect<T> extends StatelessWidget {
     await showDialog(
       context: context,
       builder: (_) {
-        List<Option<T>> filteredOptions = options;
-
         return AppDialog(
-          child: StatefulBuilder(
-            builder: (context, setState) {
-              return Column(
-                children: [
-                  AppTextInput(
-                    hintText: 'Filtrar opções',
-                    onChanged: (value) {
-                      if (value.isEmpty) {
-                        setState(() {
-                          filteredOptions = options;
-                        });
-
-                        return;
-                      }
-
-                      setState(() {
-                        filteredOptions = options
-                            .where((element) => element.label
-                                .toLowerCase()
-                                .contains(value.toLowerCase()))
-                            .toList();
-                      });
-                    },
-                  ),
-                  const SizedBox(
-                    height: 24,
-                  ),
-                  SizedBox(
-                    height: 200,
-                    child: ListView.separated(
-                        itemCount: filteredOptions.length,
+          child: ChangeNotifierProvider.value(
+            value: controller,
+            child: Column(
+              children: [
+                AppTextInput(
+                  hintText: 'Filtrar opções',
+                  onChanged: (value) => controller.filter(value),
+                ),
+                const SizedBox(
+                  height: 24,
+                ),
+                SizedBox(
+                  height: 200,
+                  child: Consumer<AppDialogSelectController<T>>(
+                      builder: (context, controller, child) {
+                    return ListView.separated(
+                        itemCount: controller.filteredOptions.length,
                         separatorBuilder: (context, index) => const Divider(
                               height: 1,
                               color: Color.fromARGB(255, 240, 235, 235),
@@ -101,7 +92,7 @@ class AppDialogSelect<T> extends StatelessWidget {
                           return InkWell(
                             onTap: () {
                               debugPrint(
-                                  'Value: ${filteredOptions[index].value}');
+                                  'Value: ${controller.filteredOptions[index].value}');
                             },
                             child: Ink(
                               padding: const EdgeInsets.all(16),
@@ -123,7 +114,7 @@ class AppDialogSelect<T> extends StatelessWidget {
                                         width: 12,
                                       ),
                                       Text(
-                                        filteredOptions[index].label,
+                                        controller.filteredOptions[index].label,
                                         style: AppTheme.bodyRegular.copyWith(
                                           color: AppTheme.bodyText,
                                           height: 0,
@@ -140,11 +131,11 @@ class AppDialogSelect<T> extends StatelessWidget {
                               ),
                             ),
                           );
-                        }),
-                  ),
-                ],
-              );
-            },
+                        });
+                  }),
+                ),
+              ],
+            ),
           ),
         );
       },

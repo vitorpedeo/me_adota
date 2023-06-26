@@ -28,7 +28,7 @@ class CurrentLocation extends StatelessWidget {
               const SizedBox(
                 width: 8,
               ),
-              const Expanded(
+              Expanded(
                 flex: 2,
                 child: AppDialogSelect(
                   label: 'Cidade',
