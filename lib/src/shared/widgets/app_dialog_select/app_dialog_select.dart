@@ -7,19 +7,16 @@ import 'package:me_adota/src/shared/widgets/app_text_input.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:provider/provider.dart';
 
-/**
- *  TODO: Implement AppDialogSelect. Use this video as a reference:
- *   https://www.youtube.com/watch?v=Ldg_TO988no
- */
-
 class AppDialogSelect<T> extends StatelessWidget {
   final String label;
   final List<Option<T>> options;
+  final Function(T value)? onSelect;
   late final AppDialogSelectController<T> controller;
 
   AppDialogSelect({
     super.key,
     required this.label,
+    this.onSelect,
     this.options = const [],
   }) {
     controller = AppDialogSelectController(
@@ -45,10 +42,19 @@ class AppDialogSelect<T> extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
-              label,
-              style: AppTheme.bodySecondaryRegular.copyWith(
-                color: AppTheme.bodySecondaryText,
+            ChangeNotifierProvider.value(
+              value: controller,
+              child: Consumer<AppDialogSelectController<T>>(
+                builder: (context, controller, child) {
+                  return Text(
+                    controller.selectedValue != null
+                        ? controller.selectedValue.toString()
+                        : label,
+                    style: AppTheme.bodySecondaryRegular.copyWith(
+                      color: AppTheme.bodySecondaryText,
+                    ),
+                  );
+                },
               ),
             ),
             PhosphorIcon(
@@ -102,8 +108,15 @@ class AppDialogSelect<T> extends StatelessWidget {
                         itemBuilder: (context, index) {
                           return InkWell(
                             onTap: () {
-                              debugPrint(
-                                  'Value: ${controller.filteredOptions[index].value}');
+                              controller.onSelect(
+                                  controller.filteredOptions[index].value);
+
+                              Navigator.of(context).pop();
+
+                              if (onSelect != null) {
+                                onSelect!(
+                                    controller.filteredOptions[index].value);
+                              }
                             },
                             child: Ink(
                               padding: const EdgeInsets.all(16),

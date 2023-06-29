@@ -23,6 +23,9 @@ class CurrentLocation extends StatelessWidget {
                 child: AppDialogSelect<String>(
                   label: 'Estado',
                   options: BrazilStates.all,
+                  onSelect: (value) {
+                    debugPrint('Valor do estado alterado: $value');
+                  },
                 ),
               ),
               const SizedBox(
@@ -30,7 +33,7 @@ class CurrentLocation extends StatelessWidget {
               ),
               Expanded(
                 flex: 2,
-                child: AppDialogSelect(
+                child: AppDialogSelect<String>(
                   label: 'Cidade',
                 ),
               ),

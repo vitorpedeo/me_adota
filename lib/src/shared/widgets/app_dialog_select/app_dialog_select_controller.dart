@@ -5,6 +5,7 @@ import 'package:me_adota/src/shared/models/option_model.dart';
 class AppDialogSelectController<T> extends ChangeNotifier {
   final List<Option<T>> options;
   List<Option<T>> _filteredOptions = [];
+  T? _selectedValue;
 
   AppDialogSelectController({
     required this.options,
@@ -13,6 +14,7 @@ class AppDialogSelectController<T> extends ChangeNotifier {
   }
 
   List<Option<T>> get filteredOptions => _filteredOptions;
+  T? get selectedValue => _selectedValue;
 
   void filter(String value) {
     if (value.isEmpty) {
@@ -28,6 +30,12 @@ class AppDialogSelectController<T> extends ChangeNotifier {
             .toLowerCase()
             .contains(removeDiacritics(value).toLowerCase()))
         .toList();
+
+    notifyListeners();
+  }
+
+  void onSelect(T value) {
+    _selectedValue = value;
 
     notifyListeners();
   }
