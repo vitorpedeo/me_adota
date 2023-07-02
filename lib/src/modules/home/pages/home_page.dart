@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:me_adota/src/modules/home/controllers/home_controller.dart';
-import 'package:me_adota/src/modules/home/widgets/current_location.dart';
+import 'package:me_adota/src/modules/home/widgets/current_location/current_location.dart';
 import 'package:me_adota/src/shared/styles/theme.dart';
 import 'package:provider/provider.dart';
 

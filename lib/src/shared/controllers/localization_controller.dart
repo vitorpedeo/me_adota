@@ -10,4 +10,10 @@ class LocalizationController extends ChangeNotifier {
   UserLocation get userLocation => _userLocation;
 
   LocalizationController();
+
+  void updateUserLocation(UserLocation userLocation) {
+    _userLocation = userLocation;
+
+    notifyListeners();
+  }
 }

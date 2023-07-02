@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:me_adota/src/modules/home/controllers/home_controller.dart';
+import 'package:me_adota/src/modules/home/widgets/current_location/current_location_controller.dart';
 import 'package:me_adota/src/shared/constants/brazil_states_constant.dart';
+import 'package:me_adota/src/shared/controllers/localization_controller.dart';
 import 'package:me_adota/src/shared/styles/theme.dart';
 import 'package:me_adota/src/shared/widgets/app_bottom_sheet.dart';
 import 'package:me_adota/src/shared/widgets/app_button.dart';
@@ -12,6 +14,8 @@ class CurrentLocation extends StatelessWidget {
   const CurrentLocation({super.key});
 
   void _showChangeLocationBottomSheet(BuildContext context) {
+    final controller = context.read<CurrentLocationController>();
+
     showModalBottomSheet(
       context: context,
       builder: (_) {
@@ -24,7 +28,8 @@ class CurrentLocation extends StatelessWidget {
                   label: 'Estado',
                   options: BrazilStates.all,
                   onSelect: (value) {
-                    debugPrint('Valor do estado alterado: $value');
+                    controller.selectedState = value;
+                    controller.fetchCities();
                   },
                 ),
               ),
@@ -33,16 +38,27 @@ class CurrentLocation extends StatelessWidget {
               ),
               Expanded(
                 flex: 2,
-                child: AppDialogSelect<String>(
-                  label: 'Cidade',
-                ),
+                child: Consumer<CurrentLocationController>(
+                    builder: (context, controller, child) {
+                  return AppDialogSelect<String>(
+                    label: 'Cidade',
+                    options: controller.cityOptions,
+                    onSelect: (value) {
+                      controller.selectedCity = value;
+                    },
+                  );
+                }),
               ),
             ],
           ),
           actions: [
             AppButton(
               text: 'Confirmar',
-              onPressed: () {},
+              onPressed: () {
+                controller.confirm();
+
+                Navigator.of(context, rootNavigator: true).pop();
+              },
             ),
           ],
         );
@@ -76,7 +92,8 @@ class CurrentLocation extends StatelessWidget {
           const SizedBox(
             width: 8,
           ),
-          Consumer<HomeController>(builder: (context, controller, child) {
+          Consumer<LocalizationController>(
+              builder: (context, controller, child) {
             return RichText(
               text: TextSpan(
                 text: '${controller.userLocation.city},',

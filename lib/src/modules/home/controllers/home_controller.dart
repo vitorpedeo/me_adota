@@ -26,7 +26,8 @@ class HomeController extends ChangeNotifier {
       _status = HomeState.loading;
       notifyListeners();
 
-      debugPrint('loading home...');
+      debugPrint(
+          'loading home for ${localizationController.userLocation.city} - ${localizationController.userLocation.state}');
 
       _status = HomeState.success;
       notifyListeners();
