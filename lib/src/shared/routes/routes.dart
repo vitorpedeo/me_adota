@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:me_adota/src/core/routes/config.dart';
-import 'package:me_adota/src/core/services/local_storage_service.dart';
+import 'package:me_adota/src/shared/routes/config.dart';
+import 'package:me_adota/src/shared/services/local_storage_service.dart';
 import 'package:me_adota/src/modules/account/pages/account_page.dart';
 import 'package:me_adota/src/modules/adoptions/pages/adoptions_page.dart';
 import 'package:me_adota/src/modules/home/pages/home_page.dart';

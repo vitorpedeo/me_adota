@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:me_adota/src/core/routes/config.dart';
+import 'package:me_adota/src/shared/routes/config.dart';
 import 'package:me_adota/src/modules/onboard/controllers/onboard_controller.dart';
 import 'package:me_adota/src/shared/styles/theme.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';

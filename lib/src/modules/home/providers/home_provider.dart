@@ -12,7 +12,7 @@ class HomeProvider {
     ),
     ChangeNotifierProvider<CurrentLocationController>(
       create: (context) => CurrentLocationController(
-        localizationController: context.read(),
+        localitiesHttpService: context.read(),
         homeController: context.read(),
       ),
     ),
