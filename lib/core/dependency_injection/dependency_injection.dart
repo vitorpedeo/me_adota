@@ -3,5 +3,5 @@ import 'package:get_it/get_it.dart';
 final getIt = GetIt.instance;
 
 abstract class DependencyInjection {
-  void inject() {}
+  Future<void> inject();
 }

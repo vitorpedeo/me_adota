@@ -4,13 +4,12 @@ import 'package:me_adota/features/global/infra/data_sources/local_data_source.da
 
 class GlobalDependencyInjection implements DependencyInjection {
   @override
-  void inject() {
+  Future<void> inject() async {
     // Data sources
     final localDataSource = LocalDataSourceImpl();
-    localDataSource.init().then((_) {
-      getIt.registerSingleton<LocalDataSource>(
-        localDataSource,
-      );
-    });
+    await localDataSource.init();
+    getIt.registerSingleton<LocalDataSource>(
+      localDataSource,
+    );
   }
 }

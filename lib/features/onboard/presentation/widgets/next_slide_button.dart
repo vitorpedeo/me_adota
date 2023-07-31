@@ -17,10 +17,12 @@ class NextSlideButton extends StatelessWidget {
 
         return ElevatedButton(
           onPressed: () async {
-            if (!cubit.isLastSlide) {
-              cubit.nextPage();
+            if (cubit.isLastSlide) {
+              await cubit.finishOnboard();
               return;
             }
+
+            cubit.nextPage();
           },
           style: ElevatedButton.styleFrom(
             backgroundColor: AppTheme.pink,

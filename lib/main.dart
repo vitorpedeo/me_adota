@@ -6,7 +6,7 @@ import 'package:me_adota/src/shared/services/local_storage_service.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  injectDependencies();
+  await injectDependencies();
 
   await LocalStorageService.init();
 

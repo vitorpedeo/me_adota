@@ -18,7 +18,9 @@ class SkipSlidesButton extends StatelessWidget {
             milliseconds: 200,
           ),
           child: GestureDetector(
-            onTap: () {},
+            onTap: () async {
+              await cubit.finishOnboard();
+            },
             child: Text(
               'Pular',
               style: AppTheme.buttonMedium.copyWith(

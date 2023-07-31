@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:me_adota/config/theme/app_svgs.dart';
+import 'package:me_adota/features/onboard/domain/use_cases/finish_onboard.dart';
 import 'package:me_adota/features/onboard/infra/models/onboard_slide_model.dart';
 
 part 'onboard_state.dart';
@@ -31,7 +32,9 @@ class OnboardCubit extends Cubit<OnboardState> {
     ),
   ];
 
-  OnboardCubit() : super(const OnboardInitial());
+  final FinishOnboardUseCase _finishOnboardUseCase;
+
+  OnboardCubit(this._finishOnboardUseCase) : super(const OnboardInitial());
 
   PageController get pageController => _pageController;
   List<OnboardSlideModel> get onboardSlides => _onboardSlides;
@@ -50,5 +53,9 @@ class OnboardCubit extends Cubit<OnboardState> {
     );
 
     emit(OnboardPageChanged(currentSlide + 1));
+  }
+
+  Future<void> finishOnboard() async {
+    await _finishOnboardUseCase();
   }
 }
