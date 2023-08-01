@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:me_adota/config/routes/app_router.dart';
+import 'package:me_adota/config/theme/app_theme.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:me_adota/features/onboard/presentation/cubits/onboard/onboard_cubit.dart';
-import 'package:me_adota/src/shared/styles/theme.dart';
 
 class NextSlideButton extends StatelessWidget {
   const NextSlideButton({
@@ -19,6 +21,11 @@ class NextSlideButton extends StatelessWidget {
           onPressed: () async {
             if (cubit.isLastSlide) {
               await cubit.finishOnboard();
+
+              if (context.mounted) {
+                context.goNamed(AppRoutes.home.name);
+              }
+
               return;
             }
 
