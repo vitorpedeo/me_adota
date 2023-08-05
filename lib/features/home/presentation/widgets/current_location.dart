@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:me_adota/config/theme/app_theme.dart';
 import 'package:me_adota/features/global/presentation/widgets/app_button.dart';
 import 'package:me_adota/features/global/presentation/widgets/custom_bottom_sheet.dart';
+import 'package:me_adota/features/global/presentation/widgets/select_menu.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 class CurrentLocation extends StatelessWidget {
@@ -58,6 +59,18 @@ class CurrentLocation extends StatelessWidget {
     CustomBottomSheet.show(
       context: context,
       title: 'Minha localização',
+      content: Row(
+        children: const [
+          Expanded(
+            child: SelectMenu(
+              hintText: 'Estado',
+            ),
+          ),
+          SizedBox(
+            width: 8,
+          ),
+        ],
+      ),
       actions: [
         AppButton(
           text: 'Confirmar',
