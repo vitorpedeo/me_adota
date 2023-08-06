@@ -11,6 +11,7 @@ class SelectMenu<T> extends StatelessWidget {
   final String? label;
   final String? hintText;
   final String searchHintText;
+  final bool disabled;
 
   const SelectMenu({
     super.key,
@@ -21,6 +22,7 @@ class SelectMenu<T> extends StatelessWidget {
     this.label,
     this.hintText,
     this.searchHintText = 'Filtrar opções',
+    this.disabled = false,
   });
 
   @override
@@ -163,11 +165,13 @@ class SelectMenu<T> extends StatelessWidget {
           hintText: hintText,
         ),
       ),
-      onChanged: (value) {
-        if (onChanged != null) {
-          onChanged!(value);
-        }
-      },
+      onChanged: disabled
+          ? null
+          : (value) {
+              if (onChanged != null) {
+                onChanged!(value);
+              }
+            },
       selectedItem: selectedItem,
     );
   }
