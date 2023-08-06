@@ -63,11 +63,17 @@ class CurrentLocation extends StatelessWidget {
         children: const [
           Expanded(
             child: SelectMenu(
-              hintText: 'Estado',
+              hintText: 'UF',
             ),
           ),
           SizedBox(
             width: 8,
+          ),
+          Expanded(
+            flex: 2,
+            child: SelectMenu(
+              hintText: 'Cidade',
+            ),
           ),
         ],
       ),

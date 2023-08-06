@@ -3,13 +3,21 @@ import 'package:dropdown_search/dropdown_search.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:me_adota/config/theme/app_theme.dart';
 
-class SelectMenu extends StatelessWidget {
+class SelectMenu<T> extends StatelessWidget {
+  final List<T> items;
+  final Function(T?)? onChanged;
+  final Function(T)? shownValue;
+  final T? selectedItem;
   final String? label;
   final String? hintText;
   final String searchHintText;
 
   const SelectMenu({
     super.key,
+    this.items = const [],
+    this.onChanged,
+    this.shownValue,
+    this.selectedItem,
     this.label,
     this.hintText,
     this.searchHintText = 'Filtrar opções',
@@ -17,7 +25,11 @@ class SelectMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DropdownSearch<String>(
+    return DropdownSearch<T>(
+      compareFn: (item1, item2) {
+        return item1 == item2;
+      },
+      itemAsString: (item) => _getShownValue(item),
       popupProps: PopupProps.dialog(
         showSelectedItems: true,
         showSearchBox: true,
@@ -71,7 +83,7 @@ class SelectMenu extends StatelessWidget {
                       width: 12,
                     ),
                     Text(
-                      item,
+                      _getShownValue(item),
                       style: AppTheme.bodyRegular.copyWith(
                         color: isSelected ? AppTheme.white : AppTheme.bodyText,
                         fontWeight:
@@ -116,7 +128,7 @@ class SelectMenu extends StatelessWidget {
           ),
         ),
       ),
-      items: const ["Brazil", "Italia", "Tunisia", 'Canada'],
+      items: items,
       dropdownButtonProps: DropdownButtonProps(
         icon: PhosphorIcon(
           PhosphorIcons.regular.caretDown,
@@ -151,7 +163,24 @@ class SelectMenu extends StatelessWidget {
           hintText: hintText,
         ),
       ),
-      onChanged: print,
+      onChanged: (value) {
+        if (onChanged != null) {
+          onChanged!(value);
+        }
+      },
+      selectedItem: selectedItem,
     );
+  }
+
+  String _getShownValue(T? item) {
+    if (item == null) {
+      return '';
+    }
+
+    if (shownValue != null) {
+      return shownValue!(item);
+    }
+
+    return item.toString();
   }
 }
