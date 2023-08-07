@@ -7,6 +7,7 @@ import 'package:me_adota/features/global/presentation/widgets/select_menu.dart';
 import 'package:me_adota/features/home/domain/entities/state.dart';
 import 'package:me_adota/features/home/presentation/cubits/states_list/states_list_cubit.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
+import 'package:shimmer/shimmer.dart';
 
 class CurrentLocation extends StatelessWidget {
   const CurrentLocation({super.key});
@@ -70,25 +71,36 @@ class CurrentLocation extends StatelessWidget {
         children: [
           Expanded(
             child: BlocBuilder<StatesListCubit, StatesListState>(
-                builder: (context, state) {
-              if (state is StatesListLoading) {
-                return const Text('Loading...');
-              }
+              builder: (context, state) {
+                if (state is StatesListLoading) {
+                  return Shimmer.fromColors(
+                    baseColor: const Color(0xFFEBEBF4),
+                    highlightColor: const Color(0xFFF4F4F4),
+                    child: Container(
+                      height: 48,
+                      decoration: BoxDecoration(
+                        color: const Color(0xFFEBEBF4),
+                        borderRadius: BorderRadius.circular(4),
+                      ),
+                    ),
+                  );
+                }
 
-              if (state is StatesListError) {
-                return Text(state.message);
-              }
+                if (state is StatesListError) {
+                  return Text(state.message);
+                }
 
-              if (state is StatesListLoaded) {
-                return SelectMenu<StateEntity>(
-                  hintText: 'UF',
-                  items: state.states,
-                  shownValue: (state) => state.name,
-                );
-              }
+                if (state is StatesListLoaded) {
+                  return SelectMenu<StateEntity>(
+                    hintText: 'UF',
+                    items: state.states,
+                    shownValue: (state) => state.abbreviation,
+                  );
+                }
 
-              return const SizedBox.shrink();
-            }),
+                return const SizedBox.shrink();
+              },
+            ),
           ),
           const SizedBox(
             width: 8,

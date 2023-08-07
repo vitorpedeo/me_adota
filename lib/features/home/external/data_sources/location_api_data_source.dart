@@ -22,6 +22,8 @@ class LocationApiDataSourceImpl implements LocationApiDataSource {
             .map<StateModel>((state) => StateModel.fromJson(state))
             .toList();
 
+        states.sort((a, b) => a.name.compareTo(b.name));
+
         return Right(states);
       },
     );
