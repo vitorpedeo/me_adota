@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:me_adota/config/theme/app_theme.dart';
 import 'package:me_adota/features/global/presentation/widgets/app_button.dart';
 import 'package:me_adota/features/global/presentation/widgets/custom_bottom_sheet.dart';
-import 'package:me_adota/features/global/presentation/widgets/select_menu.dart';
+import 'package:me_adota/features/global/presentation/widgets/dialog_select.dart';
 import 'package:me_adota/features/home/domain/entities/state.dart';
 import 'package:me_adota/features/home/presentation/cubits/states_list/states_list_cubit.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
@@ -91,7 +91,7 @@ class CurrentLocation extends StatelessWidget {
                 }
 
                 if (state is StatesListLoaded) {
-                  return SelectMenu<StateEntity>(
+                  return DialogSelect<StateEntity>(
                     hintText: 'UF',
                     items: state.states,
                     shownValue: (state) => state.abbreviation,
@@ -107,7 +107,7 @@ class CurrentLocation extends StatelessWidget {
           ),
           const Expanded(
             flex: 2,
-            child: SelectMenu(
+            child: DialogSelect(
               hintText: 'Cidade',
             ),
           ),

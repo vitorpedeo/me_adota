@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:me_adota/config/routes/app_router.dart';
-import 'package:me_adota/core/dependency_injection/dependency_injection.dart';
-import 'package:me_adota/features/home/presentation/cubits/states_list/states_list_cubit.dart';
+import 'package:me_adota/features/home/external/home_providers.dart';
+import 'package:me_adota/features/onboard/external/onboard_providers.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -11,9 +11,8 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider<StatesListCubit>(
-          create: (_) => getIt(),
-        ),
+        ...OnboardProviders.all,
+        ...HomeProviders.all,
       ],
       child: MaterialApp.router(
         title: 'Me Adota',

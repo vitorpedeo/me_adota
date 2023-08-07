@@ -3,7 +3,7 @@ import 'package:dropdown_search/dropdown_search.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:me_adota/config/theme/app_theme.dart';
 
-class SelectMenu<T> extends StatelessWidget {
+class DialogSelect<T> extends StatelessWidget {
   final List<T> items;
   final Function(T?)? onChanged;
   final Function(T)? shownValue;
@@ -13,7 +13,7 @@ class SelectMenu<T> extends StatelessWidget {
   final String searchHintText;
   final bool disabled;
 
-  const SelectMenu({
+  const DialogSelect({
     super.key,
     this.items = const [],
     this.onChanged,
