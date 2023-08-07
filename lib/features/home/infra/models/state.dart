@@ -26,4 +26,12 @@ class StateModel extends StateEntity {
       name: entity.name,
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'sigla': abbreviation,
+      'nome': name,
+    };
+  }
 }

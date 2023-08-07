@@ -5,6 +5,7 @@ import 'package:me_adota/features/global/presentation/widgets/app_button.dart';
 import 'package:me_adota/features/global/presentation/widgets/custom_bottom_sheet.dart';
 import 'package:me_adota/features/global/presentation/widgets/dialog_select.dart';
 import 'package:me_adota/features/home/domain/entities/state.dart';
+import 'package:me_adota/features/home/presentation/cubits/current_location/current_location_cubit.dart';
 import 'package:me_adota/features/home/presentation/cubits/states_list/states_list_cubit.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:shimmer/shimmer.dart';
@@ -71,8 +72,8 @@ class CurrentLocation extends StatelessWidget {
         children: [
           Expanded(
             child: BlocBuilder<StatesListCubit, StatesListState>(
-              builder: (context, state) {
-                if (state is StatesListLoading) {
+              builder: (context, statesListState) {
+                if (statesListState is StatesListLoading) {
                   return Shimmer.fromColors(
                     baseColor: const Color(0xFFEBEBF4),
                     highlightColor: const Color(0xFFF4F4F4),
@@ -86,16 +87,29 @@ class CurrentLocation extends StatelessWidget {
                   );
                 }
 
-                if (state is StatesListError) {
-                  return Text(state.message);
+                if (statesListState is StatesListError) {
+                  return Text(statesListState.message);
                 }
 
-                if (state is StatesListLoaded) {
-                  return DialogSelect<StateEntity>(
-                    hintText: 'UF',
-                    items: state.states,
-                    shownValue: (state) => state.abbreviation,
-                  );
+                if (statesListState is StatesListLoaded) {
+                  return BlocBuilder<CurrentLocationCubit,
+                          CurrentLocationState>(
+                      builder: (context, currentLocationState) {
+                    return DialogSelect<StateEntity>(
+                      hintText: 'UF',
+                      selectedItem: currentLocationState.state,
+                      items: statesListState.states,
+                      shownValue: (state) => state.abbreviation,
+                      onChanged: (state) {
+                        final currentLocationCubit =
+                            context.read<CurrentLocationCubit>();
+
+                        if (state != null) {
+                          currentLocationCubit.selectState(state);
+                        }
+                      },
+                    );
+                  });
                 }
 
                 return const SizedBox.shrink();

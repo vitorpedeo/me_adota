@@ -6,6 +6,10 @@ import 'package:me_adota/features/home/domain/entities/state.dart';
 abstract class LocationRepository {
   Future<Either<RestClientError, List<StateEntity>>> getStates();
 
+  Future<void> setSelectedState(StateEntity state);
+
+  String? getSelectedState();
+
   Future<Either<RestClientError, List<CityEntity>>> getCitiesByState(
       StateEntity state);
 }
