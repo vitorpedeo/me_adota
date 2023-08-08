@@ -4,7 +4,9 @@ import 'package:me_adota/config/theme/app_theme.dart';
 import 'package:me_adota/features/global/presentation/widgets/app_button.dart';
 import 'package:me_adota/features/global/presentation/widgets/custom_bottom_sheet.dart';
 import 'package:me_adota/features/global/presentation/widgets/dialog_select.dart';
+import 'package:me_adota/features/home/domain/entities/city.dart';
 import 'package:me_adota/features/home/domain/entities/state.dart';
+import 'package:me_adota/features/home/presentation/cubits/cities_list/cities_list_cubit.dart';
 import 'package:me_adota/features/home/presentation/cubits/current_location/current_location_cubit.dart';
 import 'package:me_adota/features/home/presentation/cubits/states_list/states_list_cubit.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
@@ -106,6 +108,11 @@ class CurrentLocation extends StatelessWidget {
 
                         if (state != null) {
                           currentLocationCubit.selectState(state);
+
+                          final citiesListCubit =
+                              context.read<CitiesListCubit>();
+
+                          citiesListCubit.fetchCitiesByState(state);
                         }
                       },
                     );
@@ -119,10 +126,54 @@ class CurrentLocation extends StatelessWidget {
           const SizedBox(
             width: 8,
           ),
-          const Expanded(
+          Expanded(
             flex: 2,
-            child: DialogSelect(
-              hintText: 'Cidade',
+            child: BlocBuilder<CitiesListCubit, CitiesListState>(
+              builder: (context, citiesListState) {
+                if (citiesListState is CitiesListLoading) {
+                  return Shimmer.fromColors(
+                    baseColor: const Color(0xFFEBEBF4),
+                    highlightColor: const Color(0xFFF4F4F4),
+                    child: Container(
+                      height: 48,
+                      decoration: BoxDecoration(
+                        color: const Color(0xFFEBEBF4),
+                        borderRadius: BorderRadius.circular(4),
+                      ),
+                    ),
+                  );
+                }
+
+                if (citiesListState is CitiesListError) {
+                  return Text(citiesListState.message);
+                }
+
+                if (citiesListState is CitiesListInitial ||
+                    citiesListState is CitiesListLoaded) {
+                  return BlocBuilder<CurrentLocationCubit,
+                          CurrentLocationState>(
+                      builder: (context, currentLocationState) {
+                    return DialogSelect<CityEntity>(
+                      hintText: 'Cidade',
+                      selectedItem: currentLocationState.city,
+                      items: citiesListState is CitiesListLoaded
+                          ? citiesListState.cities
+                          : [],
+                      shownValue: (city) => city.name,
+                      onChanged: (city) {
+                        final currentLocationCubit =
+                            context.read<CurrentLocationCubit>();
+
+                        if (city != null) {
+                          currentLocationCubit.selectCity(city);
+                        }
+                      },
+                    );
+                  });
+                }
+
+                return const SizedBox.shrink();
+              },
             ),
           ),
         ],
@@ -130,8 +181,14 @@ class CurrentLocation extends StatelessWidget {
       actions: [
         AppButton(
           text: 'Confirmar',
-          onPressed: () {
-            Navigator.of(context, rootNavigator: true).pop();
+          onPressed: () async {
+            final currentLocationCubit = context.read<CurrentLocationCubit>();
+
+            await currentLocationCubit.saveLocation();
+
+            if (context.mounted) {
+              Navigator.of(context, rootNavigator: true).pop();
+            }
           },
         ),
       ],

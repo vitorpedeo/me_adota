@@ -27,7 +27,6 @@ class CurrentLocationCubit extends Cubit<CurrentLocationState> {
 
   void getSelectedState() {
     final String? encodedState = _getSelectedStateUseCase();
-    print('[SELECTED STATE] $encodedState');
 
     if (encodedState != null) {
       final state = StateModel.fromJson(jsonDecode(encodedState));
@@ -38,5 +37,18 @@ class CurrentLocationCubit extends Cubit<CurrentLocationState> {
         ),
       );
     }
+  }
+
+  Future<void> selectCity(CityEntity city) async {
+    emit(
+      CurrentLocationState(
+        state: state.state,
+        city: city,
+      ),
+    );
+  }
+
+  Future<void> saveLocation() async {
+    print('STATE: ${state.state} - CITY: ${state.city}');
   }
 }
