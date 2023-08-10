@@ -12,4 +12,8 @@ abstract class LocationRepository {
 
   Future<Either<RestClientError, List<CityEntity>>> getCitiesByState(
       StateEntity state);
+
+  Future<void> setSelectedCity(CityEntity city);
+
+  String? getSelectedCity();
 }

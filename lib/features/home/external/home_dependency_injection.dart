@@ -2,7 +2,9 @@ import 'package:me_adota/core/dependency_injection/dependency_injection.dart';
 import 'package:me_adota/features/home/domain/repositories/location_repository.dart';
 import 'package:me_adota/features/home/domain/use_cases/fetch_cities.dart';
 import 'package:me_adota/features/home/domain/use_cases/fetch_states.dart';
+import 'package:me_adota/features/home/domain/use_cases/get_selected_city.dart';
 import 'package:me_adota/features/home/domain/use_cases/get_selected_state.dart';
+import 'package:me_adota/features/home/domain/use_cases/select_city.dart';
 import 'package:me_adota/features/home/domain/use_cases/select_state.dart';
 import 'package:me_adota/features/home/external/data_sources/location_api_data_source.dart';
 import 'package:me_adota/features/home/infra/data_sources/location_api_data_source.dart';
@@ -28,11 +30,14 @@ class HomeDependencyInjection implements DependencyInjection {
     getIt.registerSingleton<GetSelectedStateUseCase>(
         GetSelectedStateUseCase(getIt()));
     getIt.registerSingleton<FetchCitiesUseCase>(FetchCitiesUseCase(getIt()));
+    getIt.registerSingleton<SelectCityUseCase>(SelectCityUseCase(getIt()));
+    getIt.registerSingleton<GetSelectedCityUseCase>(
+        GetSelectedCityUseCase(getIt()));
 
     // Cubits
     getIt.registerFactory<StatesListCubit>(() => StatesListCubit(getIt()));
     getIt.registerFactory<CurrentLocationCubit>(
-        () => CurrentLocationCubit(getIt(), getIt()));
+        () => CurrentLocationCubit(getIt(), getIt(), getIt(), getIt()));
     getIt.registerFactory<CitiesListCubit>(() => CitiesListCubit(getIt()));
   }
 }

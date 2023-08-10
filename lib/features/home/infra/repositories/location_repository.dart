@@ -7,6 +7,7 @@ import 'package:me_adota/features/home/domain/entities/state.dart';
 import 'package:me_adota/features/home/domain/entities/city.dart';
 import 'package:me_adota/features/home/domain/repositories/location_repository.dart';
 import 'package:me_adota/features/home/infra/data_sources/location_api_data_source.dart';
+import 'package:me_adota/features/home/infra/models/city.dart';
 import 'package:me_adota/features/home/infra/models/state.dart';
 
 class LocationRepositoryImpl implements LocationRepository {
@@ -43,5 +44,22 @@ class LocationRepositoryImpl implements LocationRepository {
     return _locationApiDataSource.getCitiesByState(
       StateModel.fromEntity(state),
     );
+  }
+
+  @override
+  Future<void> setSelectedCity(CityEntity city) async {
+    final CityModel cityModel = CityModel.fromEntity(city);
+
+    await _localDataSource.setValue<String>(
+      Keys.selectedCity,
+      jsonEncode(
+        cityModel.toJson(),
+      ),
+    );
+  }
+
+  @override
+  String? getSelectedCity() {
+    return _localDataSource.getValue<String>(Keys.selectedCity);
   }
 }

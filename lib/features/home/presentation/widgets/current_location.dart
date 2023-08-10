@@ -37,22 +37,25 @@ class CurrentLocation extends StatelessWidget {
           const SizedBox(
             width: 8,
           ),
-          RichText(
-            text: TextSpan(
-              text: 'Goiânia,',
-              style: AppTheme.bodySecondaryBold.copyWith(
-                color: AppTheme.bodyText,
-              ),
-              children: [
-                TextSpan(
-                  text: ' GO',
-                  style: AppTheme.bodySecondaryRegular.copyWith(
-                    color: AppTheme.bodyText,
-                  ),
+          BlocBuilder<CurrentLocationCubit, CurrentLocationState>(
+              builder: (context, state) {
+            return RichText(
+              text: TextSpan(
+                text: '${state.city?.name},',
+                style: AppTheme.bodySecondaryBold.copyWith(
+                  color: AppTheme.bodyText,
                 ),
-              ],
-            ),
-          ),
+                children: [
+                  TextSpan(
+                    text: ' ${state.state?.abbreviation}',
+                    style: AppTheme.bodySecondaryRegular.copyWith(
+                      color: AppTheme.bodyText,
+                    ),
+                  ),
+                ],
+              ),
+            );
+          }),
           const SizedBox(
             width: 8,
           ),
@@ -108,6 +111,7 @@ class CurrentLocation extends StatelessWidget {
 
                         if (state != null) {
                           currentLocationCubit.selectState(state);
+                          currentLocationCubit.resetCity();
 
                           final citiesListCubit =
                               context.read<CitiesListCubit>();
@@ -179,18 +183,26 @@ class CurrentLocation extends StatelessWidget {
         ],
       ),
       actions: [
-        AppButton(
-          text: 'Confirmar',
-          onPressed: () async {
-            final currentLocationCubit = context.read<CurrentLocationCubit>();
+        BlocBuilder<CurrentLocationCubit, CurrentLocationState>(
+            builder: (context, state) {
+          final isButtonEnabled = state.state != null && state.city != null;
 
-            await currentLocationCubit.saveLocation();
+          return AppButton(
+            text: 'Confirmar',
+            onPressed: !isButtonEnabled
+                ? null
+                : () async {
+                    final currentLocationCubit =
+                        context.read<CurrentLocationCubit>();
 
-            if (context.mounted) {
-              Navigator.of(context, rootNavigator: true).pop();
-            }
-          },
-        ),
+                    await currentLocationCubit.saveLocation();
+
+                    if (context.mounted) {
+                      Navigator.of(context, rootNavigator: true).pop();
+                    }
+                  },
+          );
+        }),
       ],
     );
   }

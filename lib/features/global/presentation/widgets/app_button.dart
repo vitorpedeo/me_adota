@@ -41,9 +41,9 @@ class AppButton extends StatelessWidget {
         ),
         height: 40,
         decoration: BoxDecoration(
-          color: buttonColors[variant],
+          color: onPressed != null ? buttonColors[variant] : AppTheme.gray,
           border: Border.all(
-            color: AppTheme.pink,
+            color: onPressed != null ? AppTheme.pink : AppTheme.gray,
           ),
           borderRadius: const BorderRadius.all(
             Radius.circular(
@@ -61,14 +61,18 @@ class AppButton extends StatelessWidget {
                 ),
                 child: PhosphorIcon(
                   icon!,
-                  color: buttonTextColors[variant],
+                  color: onPressed != null
+                      ? buttonTextColors[variant]
+                      : AppTheme.bodyText,
                   size: 18,
                 ),
               ),
             Text(
               text,
               style: AppTheme.buttonMedium.copyWith(
-                color: buttonTextColors[variant],
+                color: onPressed != null
+                    ? buttonTextColors[variant]
+                    : AppTheme.bodyText,
               ),
             ),
           ],

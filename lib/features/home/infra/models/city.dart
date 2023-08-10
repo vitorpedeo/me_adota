@@ -22,4 +22,11 @@ class CityModel extends CityEntity {
       name: entity.name,
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'nome': name,
+    };
+  }
 }

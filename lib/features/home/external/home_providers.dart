@@ -13,7 +13,7 @@ class HomeProviders {
       create: (_) => getIt(),
     ),
     BlocProvider<CurrentLocationCubit>(
-      create: (_) => getIt()..getSelectedState(),
+      create: (_) => getIt()..getSavedLocation(),
     ),
   ];
 }
