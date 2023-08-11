@@ -33,25 +33,24 @@ class CurrentLocationCubit extends Cubit<CurrentLocationState> {
 
       emit(
         CurrentLocationState(
-          state: state,
-          city: city,
+          selectedState: state,
+          selectedCity: city,
         ),
       );
     }
   }
 
-  Future<void> selectState(StateEntity state) async {
+  Future<void> selectState(StateEntity st) async {
     emit(
-      CurrentLocationState(
-        state: state,
+      state.copyWith(
+        state: st,
       ),
     );
   }
 
   Future<void> selectCity(CityEntity city) async {
     emit(
-      CurrentLocationState(
-        state: state.state,
+      state.copyWith(
         city: city,
       ),
     );
@@ -61,13 +60,20 @@ class CurrentLocationCubit extends Cubit<CurrentLocationState> {
     if (state.state != null && state.city != null) {
       _selectStateUseCase(state.state!);
       _selectCityUseCase(state.city!);
+
+      emit(
+        state.copyWith(
+          selectedState: state.state,
+          selectedCity: state.city,
+        ),
+      );
     }
   }
 
   void resetCity() {
     if (state.city != null) {
       emit(
-        const CurrentLocationState(
+        state.copyWith(
           city: null,
         ),
       );

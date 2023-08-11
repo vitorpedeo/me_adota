@@ -41,13 +41,13 @@ class CurrentLocation extends StatelessWidget {
               builder: (context, state) {
             return RichText(
               text: TextSpan(
-                text: '${state.city?.name},',
+                text: '${state.selectedCity?.name},',
                 style: AppTheme.bodySecondaryBold.copyWith(
                   color: AppTheme.bodyText,
                 ),
                 children: [
                   TextSpan(
-                    text: ' ${state.state?.abbreviation}',
+                    text: ' ${state.selectedState?.abbreviation}',
                     style: AppTheme.bodySecondaryRegular.copyWith(
                       color: AppTheme.bodyText,
                     ),
