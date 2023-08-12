@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:me_adota/config/theme/app_theme.dart';
 import 'package:me_adota/features/home/presentation/widgets/current_location.dart';
+import 'package:me_adota/features/home/presentation/widgets/main_banner.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -22,6 +23,10 @@ class HomePage extends StatelessWidget {
           child: Column(
             children: const [
               CurrentLocation(),
+              SizedBox(
+                height: 48,
+              ),
+              MainBanner(),
             ],
           ),
         ),
