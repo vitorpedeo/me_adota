@@ -17,55 +17,60 @@ class CurrentLocation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        final statesListCubit = context.read<StatesListCubit>();
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        GestureDetector(
+          onTap: () {
+            final statesListCubit = context.read<StatesListCubit>();
 
-        statesListCubit.fetchStates();
+            statesListCubit.fetchStates();
 
-        _showLocationChangeBottomSheet(context);
-      },
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          PhosphorIcon(
-            PhosphorIcons.bold.mapPin,
-            size: 20,
-            color: AppTheme.pink,
-          ),
-          const SizedBox(
-            width: 8,
-          ),
-          BlocBuilder<CurrentLocationCubit, CurrentLocationState>(
-              builder: (context, state) {
-            return RichText(
-              text: TextSpan(
-                text: '${state.selectedCity?.name},',
-                style: AppTheme.bodySecondaryBold.copyWith(
-                  color: AppTheme.bodyText,
-                ),
-                children: [
-                  TextSpan(
-                    text: ' ${state.selectedState?.abbreviation}',
-                    style: AppTheme.bodySecondaryRegular.copyWith(
+            _showLocationChangeBottomSheet(context);
+          },
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              PhosphorIcon(
+                PhosphorIcons.bold.mapPin,
+                size: 20,
+                color: AppTheme.pink,
+              ),
+              const SizedBox(
+                width: 8,
+              ),
+              BlocBuilder<CurrentLocationCubit, CurrentLocationState>(
+                  builder: (context, state) {
+                return RichText(
+                  text: TextSpan(
+                    text: '${state.selectedCity?.name},',
+                    style: AppTheme.bodySecondaryBold.copyWith(
                       color: AppTheme.bodyText,
                     ),
+                    children: [
+                      TextSpan(
+                        text: ' ${state.selectedState?.abbreviation}',
+                        style: AppTheme.bodySecondaryRegular.copyWith(
+                          color: AppTheme.bodyText,
+                        ),
+                      ),
+                    ],
                   ),
-                ],
+                );
+              }),
+              const SizedBox(
+                width: 8,
               ),
-            );
-          }),
-          const SizedBox(
-            width: 8,
+              PhosphorIcon(
+                PhosphorIcons.bold.caretRight,
+                size: 20,
+                color: AppTheme.bodyText,
+              ),
+            ],
           ),
-          PhosphorIcon(
-            PhosphorIcons.bold.caretRight,
-            size: 20,
-            color: AppTheme.bodyText,
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 

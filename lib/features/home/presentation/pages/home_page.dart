@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:me_adota/config/theme/app_theme.dart';
 import 'package:me_adota/features/home/presentation/widgets/current_location.dart';
 import 'package:me_adota/features/home/presentation/widgets/main_banner.dart';
+import 'package:me_adota/features/home/presentation/widgets/new_pets_list.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -21,12 +22,17 @@ class HomePage extends StatelessWidget {
           width: double.infinity,
           height: double.infinity,
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: const [
               CurrentLocation(),
               SizedBox(
                 height: 48,
               ),
               MainBanner(),
+              SizedBox(
+                height: 48,
+              ),
+              NewPetsList(),
             ],
           ),
         ),
