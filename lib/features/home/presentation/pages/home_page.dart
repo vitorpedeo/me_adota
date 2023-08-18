@@ -22,6 +22,7 @@ class HomePage extends StatelessWidget {
           width: double.infinity,
           height: double.infinity,
           child: SingleChildScrollView(
+            clipBehavior: Clip.none,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: const [

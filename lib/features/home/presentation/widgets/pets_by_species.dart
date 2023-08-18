@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:me_adota/config/theme/app_theme.dart';
 import 'package:me_adota/features/global/presentation/widgets/app_carousel.dart';
+import 'package:me_adota/features/global/presentation/widgets/pet_card.dart';
 import 'package:me_adota/features/home/infra/models/species_filter.dart';
 import 'package:me_adota/features/home/presentation/cubits/pets_by_species/pets_by_species_cubit.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
@@ -21,18 +22,37 @@ class PetsBySpecies extends StatelessWidget {
           ),
         ),
         const SizedBox(
-          height: 24,
+          height: 16,
         ),
         BlocBuilder<PetsBySpeciesCubit, PetsBySpeciesState>(
-            builder: (context, state) {
-          return AppCarousel(
-            children: state.filters.map((filter) {
-              final bool isActive = state.selectedFilter == filter;
+          builder: (context, state) {
+            return AppCarousel(
+              children: state.filters.map((filter) {
+                final bool isActive = state.selectedFilter == filter;
 
-              return _buildSpeciesFilterButton(context, filter, isActive);
-            }).toList(),
-          );
-        }),
+                return _buildSpeciesFilterButton(context, filter, isActive);
+              }).toList(),
+            );
+          },
+        ),
+        const SizedBox(
+          height: 24,
+        ),
+        ListView.separated(
+          clipBehavior: Clip.none,
+          shrinkWrap: true,
+          itemBuilder: (context, state) {
+            return const PetCard(
+              type: PetCardType.horizontal,
+            );
+          },
+          separatorBuilder: (context, state) {
+            return const SizedBox(
+              height: 16,
+            );
+          },
+          itemCount: 3,
+        )
       ],
     );
   }
