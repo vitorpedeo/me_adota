@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:me_adota/config/theme/app_theme.dart';
+import 'package:me_adota/features/global/presentation/widgets/app_button.dart';
 import 'package:me_adota/features/global/presentation/widgets/app_carousel.dart';
 import 'package:me_adota/features/global/presentation/widgets/pet_card.dart';
 import 'package:me_adota/features/home/infra/models/species_filter.dart';
@@ -41,6 +42,7 @@ class PetsBySpecies extends StatelessWidget {
         ListView.separated(
           clipBehavior: Clip.none,
           shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
           itemBuilder: (context, state) {
             return const PetCard(
               type: PetCardType.horizontal,
@@ -52,7 +54,14 @@ class PetsBySpecies extends StatelessWidget {
             );
           },
           itemCount: 3,
-        )
+        ),
+        const SizedBox(
+          height: 24,
+        ),
+        AppButton(
+          text: 'Ver mais',
+          onPressed: () {},
+        ),
       ],
     );
   }

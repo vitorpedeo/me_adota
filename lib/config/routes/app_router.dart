@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:me_adota/core/dependency_injection/dependency_injection.dart';
+import 'package:me_adota/features/account/presentation/pages/account_page.dart';
 import 'package:me_adota/features/global/infra/data_sources/local_data_source.dart';
 import 'package:me_adota/features/global/presentation/widgets/scaffold_with_bottom_bar/scaffold_with_bottom_bar.dart';
 import 'package:me_adota/features/home/presentation/pages/home_page.dart';
@@ -39,6 +40,14 @@ class AppRouter {
               parentNavigatorKey: _shellNavigatorKey,
               pageBuilder: (context, state) => const NoTransitionPage(
                 child: HomePage(),
+              ),
+            ),
+            GoRoute(
+              name: AppRoutes.account.name,
+              path: AppRoutes.account.path,
+              parentNavigatorKey: _shellNavigatorKey,
+              pageBuilder: (context, state) => const NoTransitionPage(
+                child: AccountPage(),
               ),
             ),
           ],
