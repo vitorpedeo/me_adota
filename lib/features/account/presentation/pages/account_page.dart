@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
+import 'package:me_adota/config/routes/app_router.dart';
 import 'package:me_adota/config/theme/app_svgs.dart';
 import 'package:me_adota/config/theme/app_theme.dart';
 import 'package:me_adota/features/global/presentation/widgets/primitives/app_button.dart';
@@ -44,7 +46,9 @@ class AccountPage extends StatelessWidget {
                   children: [
                     AppButton(
                       text: 'Entrar na minha conta',
-                      onPressed: () {},
+                      onPressed: () {
+                        context.goNamed(AppRoutes.login.name);
+                      },
                     ),
                     const SizedBox(
                       height: 16,

@@ -31,4 +31,8 @@ class AppRoutes {
     name: 'account',
     path: '/account',
   );
+  static const AppRoute login = AppRoute(
+    name: 'login',
+    path: 'login',
+  );
 }
