@@ -9,8 +9,6 @@ import 'package:me_adota/features/onboard/presentation/pages/onboard_page.dart';
 
 part 'app_routes.dart';
 
-final _shellNavigatorKey = GlobalKey<NavigatorState>();
-
 class AppRouter {
   static GoRouter getRouter() {
     final bool isFirstTime =
@@ -18,7 +16,15 @@ class AppRouter {
     final String initialLocation =
         isFirstTime ? AppRoutes.onboard.path : AppRoutes.home.path;
 
+    final rootNavigatorKey = GlobalKey<NavigatorState>(
+      debugLabel: 'root',
+    );
+    final shellNavigatorKey = GlobalKey<NavigatorState>(
+      debugLabel: 'shell',
+    );
+
     return GoRouter(
+      navigatorKey: rootNavigatorKey,
       initialLocation: initialLocation,
       routes: [
         GoRoute(
@@ -27,7 +33,7 @@ class AppRouter {
           builder: (context, state) => const OnboardPage(),
         ),
         ShellRoute(
-          navigatorKey: _shellNavigatorKey,
+          navigatorKey: shellNavigatorKey,
           builder: (context, state, child) {
             return ScaffoldWithBottomBar(
               child: child,
@@ -35,17 +41,17 @@ class AppRouter {
           },
           routes: [
             GoRoute(
+              parentNavigatorKey: shellNavigatorKey,
               name: AppRoutes.home.name,
               path: AppRoutes.home.path,
-              parentNavigatorKey: _shellNavigatorKey,
               pageBuilder: (context, state) => const NoTransitionPage(
                 child: HomePage(),
               ),
             ),
             GoRoute(
+              parentNavigatorKey: shellNavigatorKey,
               name: AppRoutes.account.name,
               path: AppRoutes.account.path,
-              parentNavigatorKey: _shellNavigatorKey,
               pageBuilder: (context, state) => const NoTransitionPage(
                 child: AccountPage(),
               ),

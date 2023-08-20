@@ -67,7 +67,9 @@ class _ScaffoldWithBottomBarState extends State<ScaffoldWithBottomBar> {
     ),
   ];
 
-  int get _currentIndex => _locationToTabIndex(GoRouter.of(context).location);
+  int get _currentIndex => _locationToTabIndex(
+        GoRouterState.of(context).uri.toString(),
+      );
 
   int _locationToTabIndex(String location) {
     final int index = tabs.indexWhere(
