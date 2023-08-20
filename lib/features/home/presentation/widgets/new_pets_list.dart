@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:me_adota/config/theme/app_theme.dart';
-import 'package:me_adota/features/global/presentation/widgets/app_carousel.dart';
-import 'package:me_adota/features/global/presentation/widgets/pet_card.dart';
+import 'package:me_adota/features/global/presentation/widgets/helpers/app_carousel.dart';
+import 'package:me_adota/features/global/presentation/widgets/helpers/pet_card.dart';
 
 class NewPetsList extends StatelessWidget {
   const NewPetsList({super.key});

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:me_adota/config/theme/app_svgs.dart';
 import 'package:me_adota/config/theme/app_theme.dart';
-import 'package:me_adota/features/global/presentation/widgets/app_button.dart';
+import 'package:me_adota/features/global/presentation/widgets/primitives/app_button.dart';
 
 class AccountPage extends StatelessWidget {
   const AccountPage({super.key});

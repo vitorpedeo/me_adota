@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:me_adota/config/theme/app_theme.dart';
-import 'package:me_adota/features/global/presentation/widgets/app_button.dart';
-import 'package:me_adota/features/global/presentation/widgets/app_carousel.dart';
-import 'package:me_adota/features/global/presentation/widgets/pet_card.dart';
+import 'package:me_adota/features/global/presentation/widgets/primitives/app_button.dart';
+import 'package:me_adota/features/global/presentation/widgets/helpers/app_carousel.dart';
+import 'package:me_adota/features/global/presentation/widgets/helpers/pet_card.dart';
 import 'package:me_adota/features/home/infra/models/species_filter.dart';
 import 'package:me_adota/features/home/presentation/cubits/pets_by_species/pets_by_species_cubit.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';

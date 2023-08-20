@@ -3,7 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:me_adota/core/dependency_injection/dependency_injection.dart';
 import 'package:me_adota/features/account/presentation/pages/account_page.dart';
 import 'package:me_adota/features/global/infra/data_sources/local_data_source.dart';
-import 'package:me_adota/features/global/presentation/widgets/scaffold_with_bottom_bar/scaffold_with_bottom_bar.dart';
+import 'package:me_adota/features/global/presentation/widgets/layout/scaffold_with_bottom_bar/scaffold_with_bottom_bar.dart';
 import 'package:me_adota/features/home/presentation/pages/home_page.dart';
 import 'package:me_adota/features/onboard/presentation/pages/onboard_page.dart';
 

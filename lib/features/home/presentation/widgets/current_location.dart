@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:me_adota/config/theme/app_theme.dart';
-import 'package:me_adota/features/global/presentation/widgets/app_button.dart';
-import 'package:me_adota/features/global/presentation/widgets/custom_bottom_sheet.dart';
-import 'package:me_adota/features/global/presentation/widgets/dialog_select.dart';
+import 'package:me_adota/features/global/presentation/widgets/primitives/app_button.dart';
+import 'package:me_adota/features/global/presentation/widgets/helpers/custom_bottom_sheet.dart';
+import 'package:me_adota/features/global/presentation/widgets/helpers/dialog_select.dart';
 import 'package:me_adota/features/home/domain/entities/city.dart';
 import 'package:me_adota/features/home/domain/entities/state.dart';
 import 'package:me_adota/features/home/presentation/cubits/cities_list/cities_list_cubit.dart';
