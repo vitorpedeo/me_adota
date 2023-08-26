@@ -12,6 +12,7 @@ class DialogSelect<T> extends StatelessWidget {
   final String? hintText;
   final String searchHintText;
   final bool disabled;
+  final Color fillColor;
 
   const DialogSelect({
     super.key,
@@ -23,6 +24,7 @@ class DialogSelect<T> extends StatelessWidget {
     this.hintText,
     this.searchHintText = 'Filtrar opções',
     this.disabled = false,
+    this.fillColor = AppTheme.background,
   });
 
   @override
@@ -154,7 +156,7 @@ class DialogSelect<T> extends StatelessWidget {
             size: 20,
           ),
           filled: true,
-          fillColor: AppTheme.background,
+          fillColor: fillColor,
           labelStyle: AppTheme.bodySecondaryRegular.copyWith(
             color: AppTheme.bodySecondaryText,
           ),

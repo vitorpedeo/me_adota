@@ -12,7 +12,7 @@ class AppTextField extends StatelessWidget {
       decoration: InputDecoration(
         contentPadding: const EdgeInsets.symmetric(
           horizontal: 16,
-          vertical: 20,
+          vertical: 12,
         ),
         border: OutlineInputBorder(
           borderSide: BorderSide.none,
@@ -22,11 +22,11 @@ class AppTextField extends StatelessWidget {
         filled: true,
         fillColor: AppTheme.white,
         hintText: hintText,
-        hintStyle: AppTheme.bodySecondaryRegular.copyWith(
+        hintStyle: AppTheme.bodyRegular.copyWith(
           color: AppTheme.placeholder,
         ),
       ),
-      style: AppTheme.bodySecondaryRegular.copyWith(
+      style: AppTheme.bodyRegular.copyWith(
         color: AppTheme.bodyText,
       ),
     );

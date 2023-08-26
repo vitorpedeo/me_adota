@@ -35,4 +35,8 @@ class AppRoutes {
     name: 'login',
     path: 'login',
   );
+  static const AppRoute createAccount = AppRoute(
+    name: 'create-account',
+    path: 'create-account',
+  );
 }

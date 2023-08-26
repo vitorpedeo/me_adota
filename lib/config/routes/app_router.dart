@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:me_adota/core/dependency_injection/dependency_injection.dart';
 import 'package:me_adota/features/account/presentation/pages/account_page.dart';
+import 'package:me_adota/features/account/presentation/pages/create_account_page.dart';
 import 'package:me_adota/features/account/presentation/pages/login_page.dart';
 import 'package:me_adota/features/global/infra/data_sources/local_data_source.dart';
 import 'package:me_adota/features/global/presentation/widgets/layout/scaffold_with_bottom_bar/scaffold_with_bottom_bar.dart';
@@ -57,6 +58,12 @@ class AppRouter {
                 child: AccountPage(),
               ),
               routes: [
+                GoRoute(
+                  parentNavigatorKey: rootNavigatorKey,
+                  name: AppRoutes.createAccount.name,
+                  path: AppRoutes.createAccount.path,
+                  builder: (context, state) => const CreateAccountPage(),
+                ),
                 GoRoute(
                   parentNavigatorKey: rootNavigatorKey,
                   name: AppRoutes.login.name,

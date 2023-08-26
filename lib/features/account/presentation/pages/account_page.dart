@@ -63,7 +63,9 @@ class AccountPage extends StatelessWidget {
                       height: 8,
                     ),
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        context.goNamed(AppRoutes.createAccount.name);
+                      },
                       child: Text(
                         'Criar agora',
                         style: AppTheme.bodySecondaryBold.copyWith(
