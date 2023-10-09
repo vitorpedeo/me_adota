@@ -42,15 +42,24 @@ class CurrentLocation extends StatelessWidget {
               ),
               BlocBuilder<CurrentLocationCubit, CurrentLocationState>(
                   builder: (context, state) {
+                if (state.selectedCity == null || state.selectedState == null) {
+                  return Text(
+                    'Minha localização',
+                    style: AppTheme.bodySecondaryBold.copyWith(
+                      color: AppTheme.bodyText,
+                    ),
+                  );
+                }
+
                 return RichText(
                   text: TextSpan(
-                    text: '${state.selectedCity?.name},',
+                    text: '${state.selectedCity?.name}',
                     style: AppTheme.bodySecondaryBold.copyWith(
                       color: AppTheme.bodyText,
                     ),
                     children: [
                       TextSpan(
-                        text: ' ${state.selectedState?.abbreviation}',
+                        text: ', ${state.selectedState?.abbreviation}',
                         style: AppTheme.bodySecondaryRegular.copyWith(
                           color: AppTheme.bodyText,
                         ),
