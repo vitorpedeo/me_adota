@@ -39,4 +39,8 @@ class AppRoutes {
     name: 'create-account',
     path: 'create-account',
   );
+  static const AppRoute createAccountSuccess = AppRoute(
+    name: 'success',
+    path: 'success',
+  );
 }

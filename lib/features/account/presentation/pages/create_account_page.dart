@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:me_adota/config/routes/app_router.dart';
 import 'package:me_adota/config/theme/app_theme.dart';
 import 'package:me_adota/features/global/presentation/widgets/helpers/dialog_select.dart';
 import 'package:me_adota/features/global/presentation/widgets/layout/custom_app_bar/custom_app_bar.dart';
@@ -82,7 +84,9 @@ class CreateAccountPage extends StatelessWidget {
               ),
               AppButton(
                 text: 'Criar conta',
-                onPressed: () {},
+                onPressed: () {
+                  context.goNamed(AppRoutes.createAccountSuccess.name);
+                },
               ),
             ],
           ),
