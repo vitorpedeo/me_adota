@@ -4,7 +4,10 @@ import 'package:me_adota/core/dependency_injection/dependency_injection.dart';
 import 'package:me_adota/features/account/presentation/pages/account_page.dart';
 import 'package:me_adota/features/account/presentation/pages/create_account_page.dart';
 import 'package:me_adota/features/account/presentation/pages/create_account_success_page.dart';
+import 'package:me_adota/features/account/presentation/pages/forgot_password_page.dart';
 import 'package:me_adota/features/account/presentation/pages/login_page.dart';
+import 'package:me_adota/features/account/presentation/pages/recover_password_page.dart';
+import 'package:me_adota/features/account/presentation/pages/recover_password_success_page.dart';
 import 'package:me_adota/features/global/infra/data_sources/local_data_source.dart';
 import 'package:me_adota/features/global/presentation/widgets/layout/scaffold_with_bottom_bar/scaffold_with_bottom_bar.dart';
 import 'package:me_adota/features/home/presentation/pages/home_page.dart';
@@ -79,6 +82,32 @@ class AppRouter {
                   name: AppRoutes.login.name,
                   path: AppRoutes.login.path,
                   builder: (context, state) => const LoginPage(),
+                  routes: [
+                    GoRoute(
+                      parentNavigatorKey: rootNavigatorKey,
+                      name: AppRoutes.forgotPassword.name,
+                      path: AppRoutes.forgotPassword.path,
+                      builder: (context, state) => const ForgotPasswordPage(),
+                      routes: [
+                        GoRoute(
+                          parentNavigatorKey: rootNavigatorKey,
+                          name: AppRoutes.recoverPassword.name,
+                          path: AppRoutes.recoverPassword.path,
+                          builder: (context, state) =>
+                              const RecoverPasswordPage(),
+                          routes: [
+                            GoRoute(
+                              parentNavigatorKey: rootNavigatorKey,
+                              name: AppRoutes.recoverPasswordSuccess.name,
+                              path: AppRoutes.recoverPasswordSuccess.path,
+                              builder: (context, state) =>
+                                  const RecoverPasswordSuccessPage(),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
               ],
             ),

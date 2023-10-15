@@ -6,15 +6,15 @@ import 'package:me_adota/features/global/presentation/widgets/layout/custom_app_
 import 'package:me_adota/features/global/presentation/widgets/primitives/app_button.dart';
 import 'package:me_adota/features/global/presentation/widgets/primitives/app_text_field.dart';
 
-class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+class ForgotPasswordPage extends StatelessWidget {
+  const ForgotPasswordPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppTheme.background,
       appBar: const CustomAppBar(
-        title: 'Entrar na minha conta',
+        title: 'Esqueci minha senha',
       ),
       body: SafeArea(
         child: Container(
@@ -26,37 +26,27 @@ class LoginPage extends StatelessWidget {
           width: double.infinity,
           height: double.infinity,
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              const AppTextField(
-                hintText: 'E-mail',
+              Text(
+                'Insira o e-mail associado a sua conta para iniciarmos o processo de recuperação de senha',
+                style: AppTheme.bodyRegular.copyWith(
+                  color: AppTheme.bodyText,
+                ),
               ),
               const SizedBox(
                 height: 16,
               ),
               const AppTextField(
-                hintText: 'Senha',
-              ),
-              const SizedBox(
-                height: 6,
-              ),
-              GestureDetector(
-                onTap: () {
-                  context.goNamed(AppRoutes.forgotPassword.name);
-                },
-                child: Text(
-                  'Esqueceu sua senha?',
-                  style: AppTheme.captionBold.copyWith(
-                    color: AppTheme.pink,
-                  ),
-                ),
+                hintText: 'E-mail',
               ),
               const SizedBox(
                 height: 32,
               ),
               AppButton(
-                text: 'Entrar',
-                onPressed: () {},
+                text: 'Confirmar',
+                onPressed: () {
+                  context.goNamed(AppRoutes.recoverPassword.name);
+                },
               ),
             ],
           ),
