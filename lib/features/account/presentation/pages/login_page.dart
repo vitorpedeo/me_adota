@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:me_adota/config/routes/app_router.dart';
 import 'package:me_adota/config/theme/app_theme.dart';
+import 'package:me_adota/features/account/presentation/cubits/account/account_cubit.dart';
 import 'package:me_adota/features/global/presentation/widgets/layout/custom_app_bar/custom_app_bar.dart';
 import 'package:me_adota/features/global/presentation/widgets/primitives/app_button.dart';
 import 'package:me_adota/features/global/presentation/widgets/primitives/app_text_field.dart';
@@ -56,7 +58,15 @@ class LoginPage extends StatelessWidget {
               ),
               AppButton(
                 text: 'Entrar',
-                onPressed: () {},
+                onPressed: () async {
+                  final accountCubit = context.read<AccountCubit>();
+
+                  await accountCubit.login();
+
+                  if (context.mounted) {
+                    context.goNamed(AppRoutes.account.name);
+                  }
+                },
               ),
             ],
           ),
