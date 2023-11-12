@@ -4,11 +4,15 @@ class PetsBySpeciesState extends Equatable {
   final List<SpeciesFilterModel> filters = [
     SpeciesFilterModel(
       name: 'Cachorros',
-      icon: PhosphorIcons.bold.dog,
+      icon: PhosphorIcons.dog(
+        PhosphorIconsStyle.bold,
+      ),
     ),
     SpeciesFilterModel(
       name: 'Gatos',
-      icon: PhosphorIcons.bold.cat,
+      icon: PhosphorIcons.cat(
+        PhosphorIconsStyle.bold,
+      ),
     ),
   ];
   final SpeciesFilterModel? selectedFilter;

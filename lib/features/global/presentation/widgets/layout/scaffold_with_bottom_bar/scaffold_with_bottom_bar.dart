@@ -24,7 +24,9 @@ class _ScaffoldWithBottomBarState extends State<ScaffoldWithBottomBar> {
           bottom: 4,
         ),
         child: PhosphorIcon(
-          PhosphorIcons.bold.house,
+          PhosphorIcons.house(
+            PhosphorIconsStyle.bold,
+          ),
         ),
       ),
       label: 'Início',
@@ -36,7 +38,9 @@ class _ScaffoldWithBottomBarState extends State<ScaffoldWithBottomBar> {
           bottom: 4,
         ),
         child: PhosphorIcon(
-          PhosphorIcons.bold.magnifyingGlass,
+          PhosphorIcons.magnifyingGlass(
+            PhosphorIconsStyle.bold,
+          ),
         ),
       ),
       label: 'Pesquisar',
@@ -48,7 +52,9 @@ class _ScaffoldWithBottomBarState extends State<ScaffoldWithBottomBar> {
           bottom: 4,
         ),
         child: PhosphorIcon(
-          PhosphorIcons.bold.handHeart,
+          PhosphorIcons.handHeart(
+            PhosphorIconsStyle.bold,
+          ),
         ),
       ),
       label: 'Adoções',
@@ -60,7 +66,9 @@ class _ScaffoldWithBottomBarState extends State<ScaffoldWithBottomBar> {
           bottom: 4,
         ),
         child: PhosphorIcon(
-          PhosphorIcons.bold.user,
+          PhosphorIcons.user(
+            PhosphorIconsStyle.bold,
+          ),
         ),
       ),
       label: 'Conta',

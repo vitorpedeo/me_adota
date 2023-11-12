@@ -33,7 +33,9 @@ class CurrentLocation extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               PhosphorIcon(
-                PhosphorIcons.bold.mapPin,
+                PhosphorIcons.mapPin(
+                  PhosphorIconsStyle.bold,
+                ),
                 size: 20,
                 color: AppTheme.pink,
               ),
@@ -72,7 +74,9 @@ class CurrentLocation extends StatelessWidget {
                 width: 8,
               ),
               PhosphorIcon(
-                PhosphorIcons.bold.caretRight,
+                PhosphorIcons.caretRight(
+                  PhosphorIconsStyle.bold,
+                ),
                 size: 20,
                 color: AppTheme.bodyText,
               ),

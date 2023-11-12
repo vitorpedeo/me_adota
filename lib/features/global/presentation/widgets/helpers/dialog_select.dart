@@ -79,7 +79,9 @@ class DialogSelect<T> extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     PhosphorIcon(
-                      PhosphorIcons.bold.mapPin,
+                      PhosphorIcons.mapPin(
+                        PhosphorIconsStyle.bold,
+                      ),
                       size: 20,
                       color: isSelected ? AppTheme.white : AppTheme.pink,
                     ),
@@ -99,7 +101,9 @@ class DialogSelect<T> extends StatelessWidget {
                 ),
                 if (isSelected)
                   PhosphorIcon(
-                    PhosphorIcons.bold.check,
+                    PhosphorIcons.check(
+                      PhosphorIconsStyle.bold,
+                    ),
                     size: 20,
                     color: AppTheme.white,
                   ),
@@ -135,7 +139,9 @@ class DialogSelect<T> extends StatelessWidget {
       items: items,
       dropdownButtonProps: DropdownButtonProps(
         icon: PhosphorIcon(
-          PhosphorIcons.regular.caretDown,
+          PhosphorIcons.caretDown(
+            PhosphorIconsStyle.regular,
+          ),
           color: AppTheme.bodySecondaryText,
           size: 20,
         ),
@@ -151,7 +157,9 @@ class DialogSelect<T> extends StatelessWidget {
             borderSide: BorderSide.none,
           ),
           suffixIcon: PhosphorIcon(
-            PhosphorIcons.regular.caretDown,
+            PhosphorIcons.caretDown(
+              PhosphorIconsStyle.regular,
+            ),
             color: AppTheme.bodySecondaryText,
             size: 20,
           ),

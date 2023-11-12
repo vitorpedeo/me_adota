@@ -48,8 +48,12 @@ class NextSlideButton extends StatelessWidget {
             },
             child: PhosphorIcon(
               cubit.isLastSlide
-                  ? PhosphorIcons.bold.check
-                  : PhosphorIcons.bold.arrowRight,
+                  ? PhosphorIcons.check(
+                      PhosphorIconsStyle.bold,
+                    )
+                  : PhosphorIcons.arrowRight(
+                      PhosphorIconsStyle.bold,
+                    ),
               key: ValueKey(cubit.isLastSlide),
               color: AppTheme.white,
               size: 24,

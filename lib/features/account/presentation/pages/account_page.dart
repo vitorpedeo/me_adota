@@ -115,7 +115,9 @@ class AccountPage extends StatelessWidget {
   Widget _buildLoggedPage(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
-        icon: PhosphorIcons.bold.smiley,
+        icon: PhosphorIcons.smiley(
+          PhosphorIconsStyle.bold,
+        ),
         title: 'Minha conta',
       ),
       backgroundColor: AppTheme.background,

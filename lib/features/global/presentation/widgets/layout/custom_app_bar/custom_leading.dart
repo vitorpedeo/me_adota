@@ -31,7 +31,9 @@ class CustomLeading extends StatelessWidget {
     return IconButton(
       tooltip: MaterialLocalizations.of(context).backButtonTooltip,
       icon: PhosphorIcon(
-        PhosphorIcons.bold.arrowLeft,
+        PhosphorIcons.arrowLeft(
+          PhosphorIconsStyle.bold,
+        ),
         size: 24,
         color: AppTheme.pink,
       ),
