@@ -49,8 +49,8 @@ class AppRoutes {
     path: 'create-account',
   );
   static const AppRoute createAccountSuccess = AppRoute(
-    name: 'success',
-    path: 'success',
+    name: 'create-account-success',
+    path: 'create-account-success',
   );
   static const AppRoute forgotPassword = AppRoute(
     name: 'forgot-password',
@@ -63,5 +63,13 @@ class AppRoutes {
   static const AppRoute recoverPasswordSuccess = AppRoute(
     name: 'recover-password-success',
     path: 'recover-password-success',
+  );
+  static const AppRoute updateInfo = AppRoute(
+    name: 'update-info',
+    path: 'update-info',
+  );
+  static const AppRoute updatePassword = AppRoute(
+    name: 'update-password',
+    path: 'update-password',
   );
 }

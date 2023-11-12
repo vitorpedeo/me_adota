@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:me_adota/config/routes/app_router.dart';
 import 'package:me_adota/features/account/domain/use_cases/get_user_details.dart';
 import 'package:me_adota/features/account/domain/use_cases/login.dart';
 import 'package:me_adota/features/account/infra/models/account_page_item.dart';
@@ -11,23 +12,23 @@ class AccountCubit extends Cubit<AccountState> {
   final LoginUseCase _loginUseCase;
   final GetUserDetailsUseCase _getUserDetailsUseCase;
 
-  final List<AccountPageItem> accountPageItems = const [
+  final List<AccountPageItem> accountPageItems = [
     AccountPageItem(
       title: 'Atualizar meus dados',
       icon: PhosphorIconsBold.userCircle,
-      link: '#',
+      link: AppRoutes.updateInfo.name,
     ),
     AccountPageItem(
       title: 'Alterar minha senha',
       icon: PhosphorIconsFill.key,
-      link: '#',
+      link: AppRoutes.updatePassword.name,
     ),
-    AccountPageItem(
+    const AccountPageItem(
       title: 'Cadastrar um pet',
       icon: PhosphorIconsFill.pawPrint,
       link: '#',
     ),
-    AccountPageItem(
+    const AccountPageItem(
       title: 'Meus pets',
       icon: PhosphorIconsFill.bone,
       link: '#',

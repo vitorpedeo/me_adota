@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:me_adota/config/theme/app_theme.dart';
 import 'package:me_adota/features/account/presentation/cubits/account/account_cubit.dart';
 import 'package:me_adota/features/global/presentation/widgets/layout/custom_app_bar/custom_app_bar.dart';
@@ -101,7 +102,9 @@ class LoggedPage extends StatelessWidget {
                     final accountPageItem = cubit.accountPageItems[index];
 
                     return GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        context.goNamed(accountPageItem.link);
+                      },
                       child: Container(
                         padding: const EdgeInsets.all(
                           16,

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:me_adota/core/dependency_injection/dependency_injection.dart';
 import 'package:me_adota/features/account/presentation/pages/account_page/account_page.dart';
+import 'package:me_adota/features/account/presentation/pages/account_page/logged_page/update_info_page.dart';
+import 'package:me_adota/features/account/presentation/pages/account_page/logged_page/update_password_page.dart';
 import 'package:me_adota/features/account/presentation/pages/create_account_page/create_account_page.dart';
 import 'package:me_adota/features/account/presentation/pages/create_account_page/create_account_success_page.dart';
 import 'package:me_adota/features/account/presentation/pages/forget_password_page/forgot_password_page.dart';
@@ -108,6 +110,18 @@ class AppRouter {
                       ],
                     ),
                   ],
+                ),
+                GoRoute(
+                  parentNavigatorKey: rootNavigatorKey,
+                  name: AppRoutes.updateInfo.name,
+                  path: AppRoutes.updateInfo.path,
+                  builder: (context, state) => const UpdateInfoPage(),
+                ),
+                GoRoute(
+                  parentNavigatorKey: rootNavigatorKey,
+                  name: AppRoutes.updatePassword.name,
+                  path: AppRoutes.updatePassword.path,
+                  builder: (context, state) => const UpdatePasswordPage(),
                 ),
               ],
             ),
