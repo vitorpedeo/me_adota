@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:me_adota/config/theme/app_theme.dart';
 import 'package:me_adota/features/account/presentation/cubits/account/account_cubit.dart';
-import 'package:me_adota/features/account/presentation/pages/account_page/logged_page/logged_page.dart';
-import 'package:me_adota/features/account/presentation/pages/account_page/not_logged_page/not_logged_page.dart';
+import 'package:me_adota/features/account/presentation/pages/account/logged/logged_page.dart';
+import 'package:me_adota/features/account/presentation/pages/account/not_logged_page.dart';
 
 class AccountPage extends StatelessWidget {
   const AccountPage({super.key});
