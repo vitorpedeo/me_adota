@@ -72,4 +72,12 @@ class AppRoutes {
     name: 'update-password',
     path: 'update-password',
   );
+  static const AppRoute createPet = AppRoute(
+    name: 'create-pet',
+    path: 'create-pet',
+  );
+  static const AppRoute createPetSuccess = AppRoute(
+    name: 'create-pet-success',
+    path: 'create-pet-success',
+  );
 }

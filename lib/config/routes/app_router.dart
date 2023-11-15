@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:me_adota/core/dependency_injection/dependency_injection.dart';
 import 'package:me_adota/features/account/presentation/pages/account/account_page.dart';
+import 'package:me_adota/features/account/presentation/pages/account/logged/create_pet/create_pet_page.dart';
+import 'package:me_adota/features/account/presentation/pages/account/logged/create_pet/create_pet_page_success.dart';
 import 'package:me_adota/features/account/presentation/pages/account/logged/update_info_page.dart';
 import 'package:me_adota/features/account/presentation/pages/account/logged/update_password_page.dart';
 import 'package:me_adota/features/account/presentation/pages/create_account/create_account_page.dart';
@@ -122,6 +124,20 @@ class AppRouter {
                   name: AppRoutes.updatePassword.name,
                   path: AppRoutes.updatePassword.path,
                   builder: (context, state) => const UpdatePasswordPage(),
+                ),
+                GoRoute(
+                  parentNavigatorKey: rootNavigatorKey,
+                  name: AppRoutes.createPet.name,
+                  path: AppRoutes.createPet.path,
+                  builder: (context, state) => const CreatePetPage(),
+                  routes: [
+                    GoRoute(
+                      parentNavigatorKey: rootNavigatorKey,
+                      name: AppRoutes.createPetSuccess.name,
+                      path: AppRoutes.createPetSuccess.path,
+                      builder: (context, state) => const CreatePetSuccessPage(),
+                    ),
+                  ],
                 ),
               ],
             ),

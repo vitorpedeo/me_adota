@@ -23,10 +23,10 @@ class AccountCubit extends Cubit<AccountState> {
       icon: PhosphorIconsFill.key,
       link: AppRoutes.updatePassword.name,
     ),
-    const AccountPageItem(
+    AccountPageItem(
       title: 'Cadastrar um pet',
       icon: PhosphorIconsFill.pawPrint,
-      link: '#',
+      link: AppRoutes.createPet.name,
     ),
     const AccountPageItem(
       title: 'Meus pets',
