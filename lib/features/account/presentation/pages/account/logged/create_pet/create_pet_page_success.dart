@@ -55,7 +55,7 @@ class CreatePetSuccessPage extends StatelessWidget {
                 AppButton(
                   text: 'Ver meus pets cadastrados',
                   onPressed: () {
-                    context.goNamed(AppRoutes.account.name);
+                    context.goNamed(AppRoutes.myPets.name);
                   },
                 ),
               ],

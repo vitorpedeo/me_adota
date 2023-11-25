@@ -4,6 +4,7 @@ import 'package:me_adota/features/account/domain/use_cases/get_user_details.dart
 import 'package:me_adota/features/account/domain/use_cases/login.dart';
 import 'package:me_adota/features/account/infra/repositories/account_repository.dart';
 import 'package:me_adota/features/account/presentation/cubits/account/account_cubit.dart';
+import 'package:me_adota/features/account/presentation/cubits/my_pets/my_pets_cubit.dart';
 
 class AccountDependencyInjection implements DependencyInjection {
   @override
@@ -18,5 +19,6 @@ class AccountDependencyInjection implements DependencyInjection {
 
     // Cubits
     getIt.registerFactory<AccountCubit>(() => AccountCubit(getIt(), getIt()));
+    getIt.registerFactory<MyPetsCubit>(() => MyPetsCubit());
   }
 }

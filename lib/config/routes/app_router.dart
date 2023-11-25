@@ -4,6 +4,7 @@ import 'package:me_adota/core/dependency_injection/dependency_injection.dart';
 import 'package:me_adota/features/account/presentation/pages/account/account_page.dart';
 import 'package:me_adota/features/account/presentation/pages/account/logged/create_pet/create_pet_page.dart';
 import 'package:me_adota/features/account/presentation/pages/account/logged/create_pet/create_pet_page_success.dart';
+import 'package:me_adota/features/account/presentation/pages/account/logged/my_pets_page.dart';
 import 'package:me_adota/features/account/presentation/pages/account/logged/update_info_page.dart';
 import 'package:me_adota/features/account/presentation/pages/account/logged/update_password_page.dart';
 import 'package:me_adota/features/account/presentation/pages/create_account/create_account_page.dart';
@@ -138,6 +139,12 @@ class AppRouter {
                       builder: (context, state) => const CreatePetSuccessPage(),
                     ),
                   ],
+                ),
+                GoRoute(
+                  parentNavigatorKey: rootNavigatorKey,
+                  name: AppRoutes.myPets.name,
+                  path: AppRoutes.myPets.path,
+                  builder: (context, state) => const MyPetsPage(),
                 ),
               ],
             ),

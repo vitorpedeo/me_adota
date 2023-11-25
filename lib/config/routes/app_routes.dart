@@ -80,4 +80,8 @@ class AppRoutes {
     name: 'create-pet-success',
     path: 'create-pet-success',
   );
+  static const AppRoute myPets = AppRoute(
+    name: 'my-pets',
+    path: 'my-pets',
+  );
 }
