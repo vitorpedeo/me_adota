@@ -65,7 +65,6 @@ class PetCard extends StatelessWidget {
             Radius.circular(12),
           ),
           child: CachedNetworkImage(
-            width: 140,
             height: 100,
             fit: BoxFit.cover,
             imageUrl:
@@ -75,68 +74,65 @@ class PetCard extends StatelessWidget {
         const SizedBox(
           height: 16,
         ),
-        SizedBox(
-          width: 140,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 4,
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Márcio',
-                  style: AppTheme.bodyBold.copyWith(
-                    color: AppTheme.bodyText,
-                    height: 0,
+        Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 4,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Márcio',
+                style: AppTheme.bodyBold.copyWith(
+                  color: AppTheme.bodyText,
+                  height: 0,
+                ),
+              ),
+              const SizedBox(
+                height: 4,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Flexible(
+                    child: Text(
+                      'SRD',
+                      overflow: TextOverflow.ellipsis,
+                      style: AppTheme.captionRegular.copyWith(
+                        color: AppTheme.bodySecondaryText,
+                        height: 0,
+                      ),
+                    ),
                   ),
-                ),
-                const SizedBox(
-                  height: 4,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Flexible(
+                  const SizedBox(
+                    width: 4,
+                  ),
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 8,
+                      vertical: 4,
+                    ),
+                    decoration: const BoxDecoration(
+                      color: AppTheme.pinkAlpha,
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(
+                          24,
+                        ),
+                      ),
+                    ),
+                    child: Center(
                       child: Text(
-                        'SRD',
-                        overflow: TextOverflow.ellipsis,
-                        style: AppTheme.captionRegular.copyWith(
-                          color: AppTheme.bodySecondaryText,
+                        '2 anos',
+                        style: AppTheme.overlineBold.copyWith(
+                          color: AppTheme.pink,
                           height: 0,
                         ),
                       ),
                     ),
-                    const SizedBox(
-                      width: 4,
-                    ),
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 8,
-                        vertical: 4,
-                      ),
-                      decoration: const BoxDecoration(
-                        color: AppTheme.pinkAlpha,
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(
-                            24,
-                          ),
-                        ),
-                      ),
-                      child: Center(
-                        child: Text(
-                          '2 anos',
-                          style: AppTheme.overlineBold.copyWith(
-                            color: AppTheme.pink,
-                            height: 0,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
+                  ),
+                ],
+              ),
+            ],
           ),
         ),
       ],
@@ -152,7 +148,6 @@ class PetCard extends StatelessWidget {
             Radius.circular(12),
           ),
           child: CachedNetworkImage(
-            width: 100,
             height: 80,
             fit: BoxFit.cover,
             imageUrl:

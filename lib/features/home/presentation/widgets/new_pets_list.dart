@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_layout_grid/flutter_layout_grid.dart';
 import 'package:me_adota/config/theme/app_theme.dart';
-import 'package:me_adota/features/global/presentation/widgets/helpers/app_carousel.dart';
 import 'package:me_adota/features/global/presentation/widgets/helpers/pet_card.dart';
 
 class NewPetsList extends StatelessWidget {
@@ -20,12 +20,25 @@ class NewPetsList extends StatelessWidget {
         const SizedBox(
           height: 24,
         ),
-        AppCarousel(
-          children: List.generate(
-            3,
-            (index) => const PetCard(),
+        SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          clipBehavior: Clip.none,
+          child: LayoutGrid(
+            columnSizes: [
+              184.px,
+              184.px,
+              184.px,
+            ],
+            rowSizes: const [
+              auto,
+            ],
+            columnGap: 16,
+            children: List.generate(
+              3,
+              (index) => const PetCard(),
+            ),
           ),
-        ),
+        )
       ],
     );
   }

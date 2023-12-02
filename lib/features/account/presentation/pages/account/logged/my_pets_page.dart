@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_layout_grid/flutter_layout_grid.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:me_adota/config/routes/app_router.dart';
@@ -21,65 +22,72 @@ class MyPetsPage extends StatelessWidget {
         title: 'Meus pets',
       ),
       body: SafeArea(
-        child: Container(
-            padding: const EdgeInsets.only(
-              top: 32,
-              right: 32,
-              left: 32,
-            ),
-            width: double.infinity,
-            height: double.infinity,
-            child: BlocBuilder<MyPetsCubit, MyPetsState>(
-              builder: (context, state) {
-                if (state is MyPetsInitial) {
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                }
+        child: SingleChildScrollView(
+          child: Container(
+              padding: const EdgeInsets.only(
+                top: 32,
+                right: 32,
+                left: 32,
+              ),
+              width: double.infinity,
+              child: BlocBuilder<MyPetsCubit, MyPetsState>(
+                builder: (context, state) {
+                  if (state is MyPetsInitial) {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
 
-                if (state is MyPetsLoaded) {
-                  return state.pets.isNotEmpty
-                      ? GridView.count(
-                          mainAxisSpacing: 12,
-                          crossAxisSpacing: 12,
-                          crossAxisCount: 2,
-                          children: List.generate(
-                            6,
-                            (index) => const PetCard(),
-                          ),
-                        )
-                      : Column(
-                          children: [
-                            SvgPicture.asset(
-                              AppSvgs.dog5,
-                              height: 340,
+                  if (state is MyPetsLoaded) {
+                    return state.pets.isNotEmpty
+                        ? LayoutGrid(
+                            columnSizes: [1.fr, 1.fr],
+                            rowSizes: const [
+                              auto,
+                              auto,
+                              auto,
+                              auto,
+                            ],
+                            columnGap: 12,
+                            rowGap: 12,
+                            children: List.generate(
+                              8,
+                              (index) => const PetCard(),
                             ),
-                            const SizedBox(
-                              height: 32,
-                            ),
-                            Text(
-                              'Opa, você ainda não cadastrou nenhum pet!',
-                              style: AppTheme.headlineBold.copyWith(
-                                color: AppTheme.headText,
+                          )
+                        : Column(
+                            children: [
+                              SvgPicture.asset(
+                                AppSvgs.dog5,
+                                height: 340,
                               ),
-                              textAlign: TextAlign.center,
-                            ),
-                            const SizedBox(
-                              height: 32,
-                            ),
-                            AppButton(
-                              text: 'Cadastrar agora',
-                              onPressed: () {
-                                context.goNamed(AppRoutes.createPet.name);
-                              },
-                            ),
-                          ],
-                        );
-                }
+                              const SizedBox(
+                                height: 32,
+                              ),
+                              Text(
+                                'Opa, você ainda não cadastrou nenhum pet!',
+                                style: AppTheme.headlineBold.copyWith(
+                                  color: AppTheme.headText,
+                                ),
+                                textAlign: TextAlign.center,
+                              ),
+                              const SizedBox(
+                                height: 32,
+                              ),
+                              AppButton(
+                                text: 'Cadastrar agora',
+                                onPressed: () {
+                                  context.goNamed(AppRoutes.createPet.name);
+                                },
+                              ),
+                            ],
+                          );
+                  }
 
-                return const SizedBox.shrink();
-              },
-            )),
+                  return const SizedBox.shrink();
+                },
+              )),
+        ),
       ),
     );
   }
