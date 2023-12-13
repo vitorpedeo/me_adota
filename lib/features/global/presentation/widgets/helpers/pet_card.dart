@@ -64,11 +64,45 @@ class PetCard extends StatelessWidget {
           borderRadius: const BorderRadius.all(
             Radius.circular(12),
           ),
-          child: CachedNetworkImage(
-            height: 100,
-            fit: BoxFit.cover,
-            imageUrl:
-                'https://blog.petiko.com.br/wp-content/uploads/2018/05/cachorro-fofo.jpg',
+          child: Stack(
+            children: [
+              CachedNetworkImage(
+                height: 100,
+                fit: BoxFit.cover,
+                imageUrl:
+                    'https://blog.petiko.com.br/wp-content/uploads/2018/05/cachorro-fofo.jpg',
+              ),
+              Positioned(
+                bottom: 0,
+                left: 0,
+                right: 0,
+                child: Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: 6,
+                  ),
+                  decoration: const BoxDecoration(
+                    color: AppTheme.pink,
+                    borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(12),
+                      bottomRight: Radius.circular(12),
+                    ),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Adotado',
+                        style: AppTheme.captionMedium.copyWith(
+                          color: AppTheme.white,
+                          height: 0,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
         const SizedBox(
@@ -147,11 +181,41 @@ class PetCard extends StatelessWidget {
           borderRadius: const BorderRadius.all(
             Radius.circular(12),
           ),
-          child: CachedNetworkImage(
-            height: 80,
-            fit: BoxFit.cover,
-            imageUrl:
-                'https://blog.petiko.com.br/wp-content/uploads/2018/05/cachorro-fofo.jpg',
+          child: Stack(
+            children: [
+              CachedNetworkImage(
+                height: 80,
+                fit: BoxFit.cover,
+                imageUrl:
+                    'https://blog.petiko.com.br/wp-content/uploads/2018/05/cachorro-fofo.jpg',
+              ),
+              Positioned(
+                bottom: 0,
+                left: 0,
+                right: 0,
+                child: Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: 4,
+                  ),
+                  decoration: const BoxDecoration(
+                    color: AppTheme.pink,
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Adotado',
+                        style: AppTheme.captionMedium.copyWith(
+                          color: AppTheme.white,
+                          height: 0,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
         const SizedBox(
